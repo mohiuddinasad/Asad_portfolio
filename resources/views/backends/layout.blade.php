@@ -83,6 +83,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link">
+                            <span class="pc-micon">
+                                <iconify-icon icon="cil:education" width="24" height="24"></iconify-icon>
+                            </span>
+                            <span class="pc-mtext">Resume</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item"><a class="pc-link"
+                                    href="{{ route('dashboard.resume.education') }}">Education</a>
+                            </li>
+                            <li class="pc-item"><a class="pc-link"
+                                    href="{{ route('dashboard.resume.experience') }}">Experience</a>
+                            </li>
+
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -130,7 +148,7 @@
             <!-- [Mobile Media Block end] -->
             <div class="ms-auto">
                 <ul class="list-unstyled">
-                    
+
                     <li class="dropdown pc-h-item header-user-profile">
                         <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">

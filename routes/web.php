@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\Backend\MyProfile\MyProfileController;
+use App\Http\Controllers\Backend\Resume\EducationController;
+use App\Http\Controllers\Backend\Resume\ExperienceController;
 use App\Http\Controllers\Backend\Skills\FrameworkController;
 use App\Http\Controllers\Backend\Skills\SkillsController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -45,6 +49,21 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
         Route::post('/framework-skills', [FrameworkController::class, 'store'])->name('framework-skills.store');
         Route::put('/framework-skills/{id}', [FrameworkController::class, 'update'])->name('framework-skills.update');
         Route::delete('/framework-skills/{id}', [FrameworkController::class, 'destroy'])->name('framework-skills.destroy');
+    });
+
+    Route::prefix('resume/')->name('resume.')->group(function () {
+
+        // education routes
+        Route::get('education', [EducationController::class, 'Education'])->name('education');
+        Route::post('education/store', [EducationController::class, 'store'])->name('education.store');
+        Route::put('education/update/{id}', [EducationController::class, 'update'])->name('education.update');
+        Route::delete('education/delete/{id}', [EducationController::class, 'destroy'])->name('education.delete');
+
+        // experience routes
+        Route::get('experience', [ExperienceController::class, 'Experience'])->name('experience');
+        Route::post('experience/store', [ExperienceController::class, 'store'])->name('experience.store');
+        Route::put('experience/update/{id}', [ExperienceController::class, 'update'])->name('experience.update');
+        Route::delete('experience/delete/{id}', [ExperienceController::class, 'destroy'])->name('experience.delete');
     });
 
 });
