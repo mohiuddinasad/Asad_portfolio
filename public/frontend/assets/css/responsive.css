@@ -1,0 +1,41 @@
+@media (max-width: 992px) {
+  .offcanvas {
+    z-index: 999999;
+  }
+  #resume .education {
+    margin-bottom: 30px;
+  }
+
+  #services .boxes{
+   padding: 0 20px;
+  }
+  #services .servise_box {
+   width: 100%;
+  }
+
+  #pricing{
+    padding: 60px 15px;
+  }
+  #pricing .contain{
+    margin-bottom: 20px;
+  }
+
+  #contact .col-lg-7{
+    padding: 0 12px !important;
+    margin-top: 40px;
+  }
+  #contact .contact_info {
+    padding: 30px;
+  }
+  #contact .get_in {
+    padding: 30px;
+  }
+  #footer .contact {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #footer .phone a {
+    margin: 0;
+    margin-top: 10px;
+  }
+}
