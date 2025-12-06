@@ -51,7 +51,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4" class="text-center">No education records found</td>
+                                            <td colspan="4" class="text-center ">No education records found</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

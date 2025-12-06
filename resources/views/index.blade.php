@@ -102,7 +102,11 @@
         <div class="container">
             <div class="contains">
                 <span>Hello I am</span>
-                <h4>Mohiuddin Asad</h4>
+                @if(Auth::check())
+                                <h4>{{ Auth::user()->name }}</h4>
+                            @else
+                                <h4>Mohiuddin Asad</h4>
+                            @endif
                 <h1 class="animated_text"></h1>
                 <p class="text">We craft modern, responsive, and user-friendly
                     websites that <br> help your business
@@ -265,49 +269,23 @@
             <div class="row justify-content-between">
                 <div class="col-lg-5 education" data-aos="zoom-in">
                     <h4>Education</h4>
+                    @foreach ($educations as $education)
                     <div class="education_item">
-                        <span>2024 – Present</span>
-                        <h5>Diploma in Computer Science & Technology</h5>
-                        <p>Currently pursuing Diploma in CST with focus on software, web
-                            technologies, and computer
-                            systems.</p>
+                        <span>{{ $education->duration }}</span>
+                        <h5>{{ $education->title }}</h5>
+                        <p>{{ Str::limit($education->description, 100) }}</p>
                     </div>
-                    <div class="education_item">
-                        <span>2023</span>
-                        <h5>Secondary School Certificate</h5>
-                        <p>Successfully completed SSC with a strong foundation in science,
-                            technology, and essential
-                            problem-solving skills.</p>
-                    </div>
-                    <div class="education_item">
-                        <span>2025</span>
-                        <h5>Web Development Course</h5>
-                        <p>Learning Full Stack Web Development including HTML, CSS,
-                            Bootstrap, and Laravel to build
-                            professional websites.</p>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="col-lg-5 education" data-aos="zoom-in">
                     <h4>Experience</h4>
-                    <div class="education_item">
-                        <span>2025 – Present</span>
-                        <h5>Frontend Development</h5>
-                        <p>Crafting elegant, responsive interfaces with HTML, CSS, JS,
-                            Tailwind & React.</p>
+                   @foreach ($experiences as $experience)
+                   <div class="education_item">
+                        <span>{{ $experience->duration }}</span>
+                        <h5>{{ $experience->title }}</h5>
+                        <p>{{ Str::limit($experience->description, 100) }}</p>
                     </div>
-                    <div class="education_item">
-                        <span>2025 – Present</span>
-                        <h5>Backend Development</h5>
-                        <p>Building powerful, secure systems using PHP, Laravel &
-                            MySQL.</p>
-                    </div>
-                    <div class="education_item">
-                        <span>2025 – Present</span>
-                        <h5>Web Designer & Optimizer</h5>
-                        <p>Designing visually stunning websites and optimizing them for
-                            speed, SEO, and user experience.
-                        </p>
-                    </div>
+                   @endforeach
                 </div>
             </div>
     </section>
@@ -632,9 +610,11 @@
     </section><!-- /Faq Section -->
 
     <!-- Testimonials Section -->
-    <!-- <section id="testimonials" class="testimonials section accent-background">
 
-        <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt>
+
+    <section id="testimonials" class="testimonials section accent-background">
+
+        <img src="{{ asset('frontend/assets/img/testimonials-bg.jpg') }}" class="testimonials-bg" alt>
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -658,7 +638,7 @@
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <img src="assets/img/testimonials/testimonials-1.jpg"
+                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-1.jpg') }}"
                     class="testimonial-img" alt>
                   <h3>Saul Goodman</h3>
                   <h4>Ceo &amp; Founder</h4>
@@ -682,7 +662,7 @@
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <img src="assets/img/testimonials/testimonials-2.jpg"
+                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-2.jpg') }}"
                     class="testimonial-img" alt>
                   <h3>Sara Wilsson</h3>
                   <h4>Designer</h4>
@@ -706,7 +686,7 @@
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <img src="assets/img/testimonials/testimonials-3.jpg"
+                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-3.jpg') }}"
                     class="testimonial-img" alt>
                   <h3>Jena Karlis</h3>
                   <h4>Store Owner</h4>
@@ -730,7 +710,7 @@
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <img src="assets/img/testimonials/testimonials-4.jpg"
+                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-4.jpg') }}"
                     class="testimonial-img" alt>
                   <h3>Matt Brandon</h3>
                   <h4>Freelancer</h4>
@@ -754,7 +734,7 @@
 
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                  <img src="assets/img/testimonials/testimonials-5.jpg"
+                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-5.jpg') }}"
                     class="testimonial-img" alt>
                   <h3>John Larson</h3>
                   <h4>Entrepreneur</h4>
@@ -782,8 +762,9 @@
 
         </div>
 
-      </section> -->
-    <!-- /Testimonials Section -->
+      </section>
+
+      <!-- /Testimonials Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
