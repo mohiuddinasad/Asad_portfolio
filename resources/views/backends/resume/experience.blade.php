@@ -35,7 +35,7 @@
                                     <tr>
                                         <td>{{ $experience->title }}</td>
                                         <td>{{ $experience->duration }}</td>
-                                        <td>{{ Str::limit($experience->description, 100) }}</td>
+                                        <td>{{ Str::limit($experience->description, 150) }}</td>
                                         <td>
                                             <button class="btn btn-sm btn-info"
                                                 onclick="editExperience({{ $experience->id }}, '{{ $experience->title }}', '{{ $experience->duration }}', '{{ addslashes($experience->description) }}')">

@@ -182,10 +182,19 @@
                         </div>
                         <div class="col-lg-5 about-info p-0">
                             @if(Auth::check())
+                                <p><strong>Experience: </strong> <span>{{ Auth::user()->experience }} years</span></p>
+                            @else
+                                <p><strong>Experience: </strong> 5 years</p>
+                            @endif
+
+                            @if(Auth::check())
                                 <p><strong>Age: </strong> <span>{{ Auth::user()->age }}</span></p>
                             @else
                                 <p><strong>Age: </strong> 20</p>
                             @endif
+
+
+
 
                             <p><strong>Freelance: </strong> <span>Available</span></p>
                         </div>
@@ -273,7 +282,7 @@
                     <div class="education_item">
                         <span>{{ $education->duration }}</span>
                         <h5>{{ $education->title }}</h5>
-                        <p>{{ Str::limit($education->description, 100) }}</p>
+                        <p>{{ Str::limit($education->description, 150) }}</p>
                     </div>
                     @endforeach
                 </div>
@@ -283,7 +292,7 @@
                    <div class="education_item">
                         <span>{{ $experience->duration }}</span>
                         <h5>{{ $experience->title }}</h5>
-                        <p>{{ Str::limit($experience->description, 100) }}</p>
+                        <p>{{ Str::limit($experience->description, 150) }}</p>
                     </div>
                    @endforeach
                 </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('user_image')->nullable();
             $table->string('title')->nullable();
             $table->string('age')->nullable();
+            $table->string('experience')->nullable();
             $table->longText('description')->nullable();
             $table->string('phone',20)->nullable();
             $table->string('email')->unique();

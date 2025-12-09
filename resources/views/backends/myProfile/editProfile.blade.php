@@ -60,20 +60,29 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <input value="{{ $user->email }}" type="text" name="email" placeholder="Email"
                                         class="form-control mb-2">
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col">
+                                <div class="col-lg-6">
+                                    <input value="{{ $user->experience }}" type="text" name="experience"
+                                        placeholder="Experience" class="form-control mb-2">
+                                    @error('experience')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-12">
                                     <textarea placeholder="Description" name="description" id="description"
                                         class="form-control mb-2">{{ $user->description }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+
                             </div>
                         </div>
 

@@ -34,6 +34,7 @@
                         <p><b>Title:</b> {{ Auth::user()->title }}</p>
                         <p><b>email:</b> {{ Auth::user()->email }}</p>
                         <p><b>phone:</b> {{ Auth::user()->phone }}</p>
+                        <p><b>Experience:</b> {{ Auth::user()->experience }} years</p>
                         <p><b>Age:</b> {{ Auth::user()->age }}</p>
                     </div>
                     <div class="col-lg-8">

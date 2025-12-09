@@ -34,7 +34,7 @@
                                         <tr>
                                             <td>{{ $education->title }}</td>
                                             <td>{{ $education->duration }}</td>
-                                            <td>{{ Str::limit($education->description, 100) }}</td>
+                                            <td>{{ Str::limit($education->description, 150) }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-info"
                                                     onclick="editEducation({{ $education->id }}, '{{ $education->title }}', '{{ $education->duration }}', '{{ addslashes($education->description) }}')">
