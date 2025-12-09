@@ -103,10 +103,10 @@
             <div class="contains">
                 <span>Hello I am</span>
                 @if(Auth::check())
-                                <h4>{{ Auth::user()->name }}</h4>
-                            @else
-                                <h4>Mohiuddin Asad</h4>
-                            @endif
+                    <h4>{{ Auth::user()->name }}</h4>
+                @else
+                    <h4>Mohiuddin Asad</h4>
+                @endif
                 <h1 class="animated_text"></h1>
                 <p class="text">We craft modern, responsive, and user-friendly
                     websites that <br> help your business
@@ -279,22 +279,22 @@
                 <div class="col-lg-5 education" data-aos="zoom-in">
                     <h4>Education</h4>
                     @foreach ($educations as $education)
-                    <div class="education_item">
-                        <span>{{ $education->duration }}</span>
-                        <h5>{{ $education->title }}</h5>
-                        <p>{{ Str::limit($education->description, 150) }}</p>
-                    </div>
+                        <div class="education_item">
+                            <span>{{ $education->duration }}</span>
+                            <h5>{{ $education->title }}</h5>
+                            <p>{{ Str::limit($education->description, 150) }}</p>
+                        </div>
                     @endforeach
                 </div>
                 <div class="col-lg-5 education" data-aos="zoom-in">
                     <h4>Experience</h4>
-                   @foreach ($experiences as $experience)
-                   <div class="education_item">
-                        <span>{{ $experience->duration }}</span>
-                        <h5>{{ $experience->title }}</h5>
-                        <p>{{ Str::limit($experience->description, 150) }}</p>
-                    </div>
-                   @endforeach
+                    @foreach ($experiences as $experience)
+                        <div class="education_item">
+                            <span>{{ $experience->duration }}</span>
+                            <h5>{{ $experience->title }}</h5>
+                            <p>{{ Str::limit($experience->description, 150) }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
     </section>
@@ -380,76 +380,39 @@
 
                 <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
                     <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-app">Portfolio</li>
-                    <li data-filter=".filter-product">E-commerce</li>
+                    @foreach ($categories as $category)
+                        <li data-filter=".filter-{{ $category->slug }}">{{ $category->name }}</li>
+                    @endforeach
                 </ul><!-- End Portfolio Filters -->
 
                 <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                        <img src="{{ asset('frontend/assets/img/project/3.webp') }}" class="img-fluid" alt>
-                        <div class="portfolio-info">
-                            <h4>Picto</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur</p>
-                            <a href="{{ asset('frontend/assets/img/project/3.webp') }}" title="Picto"
-                                data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                    class="bi bi-zoom-in"></i></a>
-                            <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                    class="bi bi-link-45deg"></i></a>
+                    @forelse ($projects as $project)
+                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $project->category->slug }}">
+                            <img src="{{ asset('storage/projects/' . $project->image) }}" class="img-fluid"
+                                alt="{{ $project->title }}">
+                            <div class="portfolio-info">
+                                <h4>{{ $project->title }}</h4>
+                                <p>{{ Str::limit($project->description, 50) }}</p>
+                                <a href="{{ asset('storage/projects/' . $project->image) }}" title="{{ $project->title }}"
+                                    data-gallery="portfolio-gallery-{{ $project->category->slug }}"
+                                    class="glightbox preview-link">
+                                    <i class="bi bi-zoom-in"></i>
+                                </a>
+                                @if($project->link)
+                                    <a href="{{ $project->link }}" title="More Details" class="details-link" target="_blank">
+                                        <i class="bi bi-link-45deg"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div><!-- End Portfolio Item -->
+                    @empty
+                        <div class="col-12 text-center">
+                            <p>No projects available yet.</p>
                         </div>
-                    </div><!-- End Portfolio Item -->
+                    @endforelse
 
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                        <img src="{{ asset('frontend/assets/img/project/2.png') }}" class="img-fluid" alt>
-                        <div class="portfolio-info">
-                            <h4>Furniro</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur</p>
-                            <a href="{{ asset('frontend/assets/img/project/2.png') }}" title="Furniro"
-                                data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                    class="bi bi-zoom-in"></i></a>
-                            <a href="https://mohiuddinasad.github.io/e-commerce_1/" title="More Details"
-                                class="details-link"><i class="bi bi-link-45deg"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
 
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                        <img src="{{ asset('frontend/assets/img/project/5.png') }}" class="img-fluid" alt>
-                        <div class="portfolio-info">
-                            <h4>Ashikur</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur</p>
-                            <a href="{{ asset('frontend/assets/img/project/5.png') }}" title="Ashikur"
-                                data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                    class="bi bi-zoom-in"></i></a>
-                            <a href="https://mohiuddinasad.github.io/bootstrap-project-3/" title="More Details"
-                                class="details-link"><i class="bi bi-link-45deg"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
-
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                        <img src="{{ asset('frontend/assets/img/project/Thumbnail.png') }}" class="img-fluid" alt>
-                        <div class="portfolio-info">
-                            <h4>Ecobazar</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur</p>
-                            <a href="{{ asset('frontend/assets/img/project/Thumbnail.png') }}" title="Ecobazar"
-                                data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                    class="bi bi-zoom-in"></i></a>
-                            <a href="https://mohiuddinasad.github.io/project-1/" title="More Details"
-                                class="details-link"><i class="bi bi-link-45deg"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
-
-                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                        <img src="{{ asset('frontend/assets/img/project/4.png') }}" class="img-fluid" alt>
-                        <div class="portfolio-info">
-                            <h4>App 3</h4>
-                            <p>Lorem ipsum, dolor sit amet consectetur</p>
-                            <a href="{{ asset('frontend/assets/img/project/4.png') }}" title="App 3"
-                                data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                    class="bi bi-zoom-in"></i></a>
-                            <a href="https://mohiuddinasad.github.io/bootstrap-project-2/" title="More Details"
-                                class="details-link"><i class="bi bi-link-45deg"></i></a>
-                        </div>
-                    </div><!-- End Portfolio Item -->
 
                 </div><!-- End Portfolio Container -->
 
@@ -627,8 +590,8 @@
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
+            <div class="swiper init-swiper">
+                <script type="application/json" class="swiper-config">
             {
               "loop": true,
               "speed": 600,
@@ -643,137 +606,127 @@
               }
             }
           </script>
-            <div class="swiper-wrapper">
+                <div class="swiper-wrapper">
 
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-1.jpg') }}"
-                    class="testimonial-img" alt>
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Proin iaculis purus consequat sem cure digni ssim
-                      donec porttitora entum suscipit rhoncus. Accusantium quam,
-                      ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                      risus at semper.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-1.jpg') }}"
+                                class="testimonial-img" alt>
+                            <h3>Saul Goodman</h3>
+                            <h4>Ceo &amp; Founder</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <p>
+                                <i class="bi bi-quote quote-icon-left"></i>
+                                <span>Proin iaculis purus consequat sem cure digni ssim
+                                    donec porttitora entum suscipit rhoncus. Accusantium quam,
+                                    ultricies eget id, aliquam eget nibh et. Maecen aliquam,
+                                    risus at semper.</span>
+                                <i class="bi bi-quote quote-icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-2.jpg') }}"
+                                class="testimonial-img" alt>
+                            <h3>Sara Wilsson</h3>
+                            <h4>Designer</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <p>
+                                <i class="bi bi-quote quote-icon-left"></i>
+                                <span>Export tempor illum tamen malis malis eram quae irure
+                                    esse labore quem cillum quid cillum eram malis quorum
+                                    velit fore eram velit sunt aliqua noster fugiat irure amet
+                                    legam anim culpa.</span>
+                                <i class="bi bi-quote quote-icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-3.jpg') }}"
+                                class="testimonial-img" alt>
+                            <h3>Jena Karlis</h3>
+                            <h4>Store Owner</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <p>
+                                <i class="bi bi-quote quote-icon-left"></i>
+                                <span>Enim nisi quem export duis labore cillum quae magna
+                                    enim sint quorum nulla quem veniam duis minim tempor
+                                    labore quem eram duis noster aute amet eram fore quis sint
+                                    minim.</span>
+                                <i class="bi bi-quote quote-icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-4.jpg') }}"
+                                class="testimonial-img" alt>
+                            <h3>Matt Brandon</h3>
+                            <h4>Freelancer</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <p>
+                                <i class="bi bi-quote quote-icon-left"></i>
+                                <span>Fugiat enim eram quae cillum dolore dolor amet nulla
+                                    culpa multos export minim fugiat minim velit minim dolor
+                                    enim duis veniam ipsum anim magna sunt elit fore quem
+                                    dolore labore illum veniam.</span>
+                                <i class="bi bi-quote quote-icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-5.jpg') }}"
+                                class="testimonial-img" alt>
+                            <h3>John Larson</h3>
+                            <h4>Entrepreneur</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <p>
+                                <i class="bi bi-quote quote-icon-left"></i>
+                                <span>Quis quorum aliqua sint quem legam fore sunt eram
+                                    irure aliqua veniam tempor noster veniam enim culpa labore
+                                    duis sunt culpa nulla illum cillum fugiat legam esse
+                                    veniam culpa fore nisi cillum quid.</span>
+                                <i class="bi bi-quote quote-icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-2.jpg') }}"
-                    class="testimonial-img" alt>
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Export tempor illum tamen malis malis eram quae irure
-                      esse labore quem cillum quid cillum eram malis quorum
-                      velit fore eram velit sunt aliqua noster fugiat irure amet
-                      legam anim culpa.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-3.jpg') }}"
-                    class="testimonial-img" alt>
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Enim nisi quem export duis labore cillum quae magna
-                      enim sint quorum nulla quem veniam duis minim tempor
-                      labore quem eram duis noster aute amet eram fore quis sint
-                      minim.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-4.jpg') }}"
-                    class="testimonial-img" alt>
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla
-                      culpa multos export minim fugiat minim velit minim dolor
-                      enim duis veniam ipsum anim magna sunt elit fore quem
-                      dolore labore illum veniam.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('frontend/assets/img/testimonials/testimonials-5.jpg') }}"
-                    class="testimonial-img" alt>
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i><i
-                      class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Quis quorum aliqua sint quem legam fore sunt eram
-                      irure aliqua veniam tempor noster veniam enim culpa labore
-                      duis sunt culpa nulla illum cillum fugiat legam esse
-                      veniam culpa fore nisi cillum quid.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
-          </div>
 
         </div>
 
-      </section>
+    </section>
 
-      <!-- /Testimonials Section -->
+    <!-- /Testimonials Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">

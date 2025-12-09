@@ -5,16 +5,11 @@ use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
 use App\Http\Controllers\Backend\Skills\FrameworkController;
 use App\Http\Controllers\Backend\Skills\SkillsController;
+use App\Http\Controllers\Backend\Portfolio\CategoryController;
+use App\Http\Controllers\Backend\Portfolio\ProjectController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-
-
-
-
-
-
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
@@ -35,6 +30,7 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
     Route::get('profile-edit', [MyProfileController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile-info', [MyProfileController::class, 'profileInfo'])->name('profile.info');
     Route::post('/profile/password-update', [MyProfileController::class, 'passwordUpdate'])->name('profile.password.update');
+
     // skills routes
     Route::prefix('skills/')->name('skills.')->group(function () {
 
@@ -66,6 +62,27 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
         Route::delete('experience/delete/{id}', [ExperienceController::class, 'destroy'])->name('experience.delete');
     });
 
+    // Portfolio routes
+    Route::prefix('portfolio/')->name('portfolio.')->group(function () {
+
+        // Category routes
+        Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('categories/update/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('categories/delete/{category}', [CategoryController::class, 'destroy'])->name('categories.delete');
+
+        // Project routes
+        Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+        Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+        Route::post('projects/store', [ProjectController::class, 'store'])->name('projects.store');
+        Route::get('projects/edit/{project}', [ProjectController::class, 'edit'])->name('projects.edit');
+        Route::put('projects/update/{project}', [ProjectController::class, 'update'])->name('projects.update');
+        Route::delete('projects/delete/{project}', [ProjectController::class, 'destroy'])->name('projects.delete');
+    });
+
 });
+
 // frontend routes
 require __DIR__ . '/auth.php';

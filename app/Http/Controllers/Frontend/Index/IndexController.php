@@ -3,22 +3,68 @@
 namespace App\Http\Controllers\Frontend\Index;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Framework;
+use App\Models\Project;
 use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $skills = Skills::all(); // Database theke data ana
         $frameworkSkills = Framework::all();
         $educations = Education::all();
         $experiences = Experience::all();
-        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences'));
+        $categories = Category::withCount('projects')
+            ->orderBy('order')
+            ->get();
+
+        $selectedCategory = $request->get('category');
+
+        $projectsQuery = Project::with('category')->orderBy('order');
+
+        if ($selectedCategory) {
+            $projectsQuery->whereHas('category', function ($query) use ($selectedCategory) {
+                $query->where('slug', $selectedCategory);
+            });
+        }
+
+        // Get total count for "View All" button logic
+        $totalProjects = $projectsQuery->count();
+
+        // Get first 6 projects for index page
+        $projects = $projectsQuery->limit(6)->get();
+
+        $showViewAll = $totalProjects > 6;
+
+        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll'));
     }
+
+     public function all(Request $request)
+    {
+        $categories = Category::withCount('projects')
+            ->orderBy('order')
+            ->get();
+
+        $selectedCategory = $request->get('category');
+
+        $projectsQuery = Project::with('category')->orderBy('order');
+
+        if ($selectedCategory) {
+            $projectsQuery->whereHas('category', function($query) use ($selectedCategory) {
+                $query->where('slug', $selectedCategory);
+            });
+        }
+
+        $projects = $projectsQuery->paginate(12);
+
+        return view('frontends.project', compact('categories', 'projects', 'selectedCategory'));
+    }
+
 }

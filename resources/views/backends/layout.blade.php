@@ -101,8 +101,25 @@
 
                         </ul>
                     </li>
-                </ul>
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link">
+                            <span class="pc-micon">
+                                <iconify-icon icon="eos-icons:project-outlined" width="24" height="24"></iconify-icon>
+                            </span>
+                            <span class="pc-mtext">Portfolio</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item"><a class="pc-link"
+                                    href="{{ route('dashboard.portfolio.categories.index') }}">Categories</a>
+                            </li>
+                            <li class="pc-item"><a class="pc-link"
+                                    href="{{ route('dashboard.portfolio.projects.index') }}">Projects</a>
+                            </li>
 
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
