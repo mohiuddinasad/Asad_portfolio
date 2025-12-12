@@ -145,53 +145,39 @@
                 <div class="col-md-6" data-aos="zoom-in">
 
                     <div class="col-lg-5">
-                        @if(Auth::check())
-                            <img src="{{ Auth::user()->user_image ? asset(Auth::user()->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
+                       
+                            <img src="{{ $user->user_image ? asset($user->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
                                 class="img-fluid" alt>
-                        @else
-                            <img src="{{ asset('backend/assets/images/user/avatar-2.jpg') }}" class="img-fluid" alt>
-                        @endif
+                    
 
                     </div>
                     <div class="row justify-content-between mt-3">
                         <div class="col-lg-7 about-info p-0">
-                            @if(Auth::check())
-                                <p><strong>Name: </strong> <span>{{ Auth::user()->name }}</span></p>
-                            @else
-                                <p><strong>Name: </strong> Guest</p>
-                            @endif
+                            
+                                <p><strong>Name: </strong> <span>{{ $user->name }}</span></p>
+                            
 
-                            @if(Auth::check())
-                                <p><strong>Profile: </strong> <span>{{ Auth::user()->title }}</span></p>
-                            @else
-                                <p><strong>Profile: </strong> Web developer</p>
-                            @endif
+                            
+                                <p><strong>Profile: </strong> <span>{{ $user->title }}</span></p>
+                         
 
-                            @if(Auth::check())
-                                <p><strong>Email: </strong> <span>{{ Auth::user()->email }}</span></p>
-                            @else
-                                <p><strong>Email: </strong> Mohiuddin@gmail.com</p>
-                            @endif
+                           
+                                <p><strong>Email: </strong> <span>{{ $user->email }}</span></p>
+                        
 
-                            @if(Auth::check())
-                                <p><strong>Phone: </strong> <span>{{ Auth::user()->phone }}</span></p>
-                            @else
-                                <p><strong>Phone: </strong> 01761955564</p>
-                            @endif
+                            
+                                <p><strong>Phone: </strong> <span>{{ $user->phone }}</span></p>
+                            
+                       
 
                         </div>
                         <div class="col-lg-5 about-info p-0">
-                            @if(Auth::check())
-                                <p><strong>Experience: </strong> <span>{{ Auth::user()->experience }} years</span></p>
-                            @else
-                                <p><strong>Experience: </strong> 5 years</p>
-                            @endif
+                          
+                                <p><strong>Experience: </strong> <span>{{ $user->experience }} years</span></p>
+                          
 
-                            @if(Auth::check())
-                                <p><strong>Age: </strong> <span>{{ Auth::user()->age }}</span></p>
-                            @else
-                                <p><strong>Age: </strong> 20</p>
-                            @endif
+                                <p><strong>Age: </strong> <span>{{ $user->age }}</span></p>
+                        
 
 
 
@@ -205,12 +191,9 @@
                 <div class="col-md-6" data-aos="zoom-in">
                     <div class="about-me">
                         <h4>About me</h4>
-                        @if(Auth::check())
-                            <p> <span>{{ Auth::user()->description }}</span></p>
-                        @else
-                            <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima, culpa?</p>
-                        @endif
-
+                      
+                            <p> <span>{{ $user->description }}</span></p>
+                 
                     </div>
                 </div>
             </div>
@@ -272,8 +255,7 @@
             <!-- Section Title -->
             <div class="section-title" data-aos="fade-up">
                 <h2>Resume</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-                    consectetur velit</p>
+
             </div><!-- End Section Title -->
             <div class="row justify-content-between">
                 <div class="col-lg-5 education" data-aos="zoom-in">
@@ -414,8 +396,12 @@
 
 
 
-                </div><!-- End Portfolio Container -->
 
+
+                </div><!-- End Portfolio Container -->
+                <div class="view_all">
+                    <a href="{{ route('projects.all') }}">View More</a>
+                </div>
             </div>
 
         </div>
@@ -440,54 +426,22 @@
 
                 <div class="col-lg-7">
                     <div class="row justify-content-between slider">
-                        <div class="col-lg-6 price_box">
-                            <div class="details">
-                                <span>Basic Design</span>
-                                <h4>Web Design</h4>
-                                <h5>$29.00</h5>
-                                <p>Carefully crafted components</p>
-                                <p>Amazing page examples</p>
-                                <p>Super friendly support team</p>
-                                <p>Awesome Support</p>
-                                <a href>Get Started</a>
+                        @foreach ($pricings as $pricing)
+                            <div class="col-lg-6 price_box">
+                                <div class="details">
+                                    <span>{{ $pricing->subtitle }}</span>
+                                    <h4>{{ $pricing->title }}</h4>
+                                    <h5>${{ $pricing->price }}</h5>
+                                    @if($pricing->features && count($pricing->features) > 0)
+                                        @foreach($pricing->features as $feature)
+                                            <p>{{ $feature }}</p>
+                                        @endforeach
+                                    @endif
+                                    <a href>Get Started</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 price_box">
-                            <div class="details">
-                                <span>Basic Design</span>
-                                <h4>Web Design</h4>
-                                <h5>$29.00</h5>
-                                <p>Carefully crafted components</p>
-                                <p>Amazing page examples</p>
-                                <p>Super friendly support team</p>
-                                <p>Awesome Support</p>
-                                <a href>Get Started</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 price_box">
-                            <div class="details">
-                                <span>Basic Design</span>
-                                <h4>Web Design</h4>
-                                <h5>$29.00</h5>
-                                <p>Carefully crafted components</p>
-                                <p>Amazing page examples</p>
-                                <p>Super friendly support team</p>
-                                <p>Awesome Support</p>
-                                <a href>Get Started</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 price_box">
-                            <div class="details">
-                                <span>Basic Design</span>
-                                <h4>Web Design</h4>
-                                <h5>$29.00</h5>
-                                <p>Carefully crafted components</p>
-                                <p>Amazing page examples</p>
-                                <p>Super friendly support team</p>
-                                <p>Awesome Support</p>
-                                <a href>Get Started</a>
-                            </div>
-                        </div>
+                        @endforeach
+
 
                     </div>
                 </div>
@@ -784,31 +738,37 @@
                                 discuss your ideas and help you turn them into reality</p>
                         </div>
                         <div class="input">
-                            <form action class="text-center" id="contactForm">
+                            <form class="text-center" id="contactForm" method="POST" action="">
+                                @csrf
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput name"
+                                    <input type="text" class="form-control" id="name" name="name"
                                         placeholder="your name">
-                                    <label for="floatingInput">Your Name</label>
+                                    <label for="name">Your Name</label>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput email"
+                                    <input type="email" class="form-control" id="email" name="email"
                                         placeholder="your email">
-                                    <label for="floatingInput">Your Email</label>
+                                    <label for="email">Your Email</label>
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput subject"
-                                        placeholder="subject">
-                                    <label for="floatingInput">Subject</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <textarea class="form-control" placeholder="Leave a comment here"
-                                        id="floatingTextarea2 message" style="height: 100px"></textarea>
-                                    <label for="floatingTextarea2">Comments</label>
-                                </div>
-                                <button type="submit">Send Message</button>
 
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="subject" name="subject"
+                                        placeholder="subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="message" name="message"
+                                        placeholder="Leave a comment here" style="height: 100px"></textarea>
+                                    <label for="message">Comments</label>
+                                </div>
+
+                                <button type="submit" id="submitBtn">Send Message</button>
+
+                                <!-- Success/Error Messages -->
+                                <div id="formMessage" style="margin-top: 15px;"></div>
                             </form>
                         </div>
                     </div>
@@ -859,9 +819,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Preloader -->
-    <div id="preloader">
-
-    </div>
+    <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('frontend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -888,6 +846,56 @@
     <script src="{{ asset('frontend/assets/js/slider.js') }}"></script>
 
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('formMessage');
+            const form = this;
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            messageDiv.innerHTML = '';
+
+            // Get form data
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    messageDiv.innerHTML = '<div style="color: green; padding: 10px; background: #d4edda; border-radius: 5px;">' + data.message + '</div>';
+                    form.reset(); // Clear form
+                } else {
+                    let errorMsg = data.message || 'Failed to send message.';
+                    if (data.errors) {
+                        errorMsg += '<br>' + Object.values(data.errors).flat().join('<br>');
+                    }
+                    messageDiv.innerHTML = '<div style="color: red; padding: 10px; background: #f8d7da; border-radius: 5px;">' + errorMsg + '</div>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.innerHTML = '<div style="color: red; padding: 10px; background: #f8d7da; border-radius: 5px;">An error occurred. Please try again.</div>';
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
 
 </body>
 

@@ -7,7 +7,7 @@
         <!-- Page Title -->
         <div class="row">
             <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">Portfolio Projects</h4>
                     <div class="page-title-right">
                         <a href="{{ route('dashboard.portfolio.projects.create') }}" class="btn btn-primary">
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mt-3">
-                    <div class="card-body">
+                    <div class="card-body" style="overflow-x: auto">
                         <table class="table table-bordered dt-responsive nowrap" style="width:100%">
                             <thead>
                                 <tr>

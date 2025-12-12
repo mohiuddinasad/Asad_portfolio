@@ -55,7 +55,7 @@
             <div class="card-header border-0 d-flex justify-content-between align-items-center">
                 <h3 class="m-0">Framework Skill List</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body list" style="overflow-x:auto;">
                 @if($frameworkSkills->count() > 0)
                     <table class="table table-bordered">
                         <thead>

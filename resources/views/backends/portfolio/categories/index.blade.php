@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mt-3">
-                    <div class="card-body">
+                    <div class="card-body" style="overflow-x: auto;">
                         <table class="table table-bordered dt-responsive nowrap" style="width:100%">
                             <thead>
                                 <tr>

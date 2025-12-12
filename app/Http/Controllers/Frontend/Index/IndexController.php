@@ -7,20 +7,23 @@ use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Framework;
+use App\Models\Pricing;
 use App\Models\Project;
 use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
     public function index(Request $request)
     {
-
+        $user = User::find(2); // Assuming the user with ID 1 is the portfolio owner
         $skills = Skills::all(); // Database theke data ana
         $frameworkSkills = Framework::all();
         $educations = Education::all();
         $experiences = Experience::all();
+        $pricings = Pricing::get();
         $categories = Category::withCount('projects')
             ->orderBy('order')
             ->get();
@@ -43,7 +46,7 @@ class IndexController extends Controller
 
         $showViewAll = $totalProjects > 6;
 
-        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll'));
+        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings'));
     }
 
      public function all(Request $request)

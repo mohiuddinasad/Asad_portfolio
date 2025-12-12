@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>{{ Auth::user()->name }}</title>
+    <title>Mohiuddin Asad</title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style-preset.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+
+
+
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -59,6 +63,13 @@
                         <a href="{{ route('dashboard') }}" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
                             <span class="pc-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{{ route('dashboard.pricing.index') }}" class="pc-link">
+                            <span class="pc-micon"><iconify-icon icon="carbon:pricing-traditional" width="24"
+                                    height="24"></iconify-icon></span>
+                            <span class="pc-mtext">Pricing</span>
                         </a>
                     </li>
 
@@ -184,7 +195,6 @@
                                         <h6 class="mb-1">{{ Auth::user()->name }}</h6>
                                         <span>{{ Auth::user()->title }}</span>
                                     </div>
-
                                 </div>
                             </div>
                             <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
@@ -193,7 +203,6 @@
                                         data-bs-target="#drp-tab-1" type="button" role="tab" aria-controls="drp-tab-1"
                                         aria-selected="true"><i class="ti ti-user"></i> Profile</button>
                                 </li>
-
                             </ul>
                             <div class="tab-content" id="mysrpTabContent">
                                 <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel"
@@ -206,13 +215,11 @@
                                         <i class="ti ti-user"></i>
                                         <span>View Profile</span>
                                     </a>
-
                                     <a href="{{ route('logout') }}" class="dropdown-item">
                                         <i class="ti ti-power"></i>
                                         <span>Logout</span>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     </li>
@@ -230,6 +237,7 @@
             @yield('backend_content')
         </div>
     </div>
+    <div id="preloader"></div>
     <!-- [ Main Content ] end -->
     <footer class="pc-footer">
 
@@ -247,6 +255,11 @@
     <script src="{{ asset('backend/assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('backend/assets/js/plugins/feather.min.js') }}"></script>
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+
+
+
 
 
 

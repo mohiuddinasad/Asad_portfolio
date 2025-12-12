@@ -1275,6 +1275,27 @@ body.dark #services .servise_box .text h4 {
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
+.portfolio .view_all {
+    margin-top: 40px;
+    text-align: center;
+}
+.portfolio .view_all a{
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.portfolio .view_all a:hover{
+    background-color: var(--background-color);
+    outline: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
 .portfolio .portfolio-filters {
   padding: 0;
   margin: 0 auto 20px auto;

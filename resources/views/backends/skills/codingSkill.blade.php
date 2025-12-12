@@ -54,7 +54,7 @@
             <div class="card-header border-0 d-flex justify-content-between align-items-center">
                 <h3 class="m-0">Coding Skill List</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow-x:auto;">
                 @if($skills->count() > 0)
                     <table class="table table-bordered">
                         <thead>

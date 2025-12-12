@@ -1,15 +1,25 @@
 <?php
 
+
 use App\Http\Controllers\Backend\MyProfile\MyProfileController;
+use App\Http\Controllers\Backend\Portfolio\CategoryController;
+use App\Http\Controllers\Backend\Portfolio\ProjectController;
+use App\Http\Controllers\Backend\Pricing\PricingController;
 use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
 use App\Http\Controllers\Backend\Skills\FrameworkController;
+
+
 use App\Http\Controllers\Backend\Skills\SkillsController;
-use App\Http\Controllers\Backend\Portfolio\CategoryController;
-use App\Http\Controllers\Backend\Portfolio\ProjectController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
+
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
@@ -82,7 +92,21 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
         Route::delete('projects/delete/{project}', [ProjectController::class, 'destroy'])->name('projects.delete');
     });
 
+    // pricing routes
+    Route::prefix('pricing/')->name('pricing.')->group(function () {
+        Route::get('/', [PricingController::class, 'index'])->name('index');
+        Route::get('create', [PricingController::class, 'create'])->name('create');
+        Route::post('store', [PricingController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [PricingController::class, 'edit'])->name('edit');
+        Route::put('update/{id}', [PricingController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [PricingController::class, 'destroy'])->name('delete');
+    });
+
 });
 
 // frontend routes
+
+Route::get('/projects', [IndexController::class, 'all'])->name('projects.all');
+
+
 require __DIR__ . '/auth.php';
