@@ -1,19 +1,21 @@
 <?php
 
 
+use App\Http\Controllers\Backend\Faq\FaqController;
 use App\Http\Controllers\Backend\MyProfile\MyProfileController;
 use App\Http\Controllers\Backend\Portfolio\CategoryController;
 use App\Http\Controllers\Backend\Portfolio\ProjectController;
 use App\Http\Controllers\Backend\Pricing\PricingController;
 use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
+
+
 use App\Http\Controllers\Backend\Skills\FrameworkController;
-
-
 use App\Http\Controllers\Backend\Skills\SkillsController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -100,6 +102,16 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
         Route::get('edit/{id}', [PricingController::class, 'edit'])->name('edit');
         Route::put('update/{id}', [PricingController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [PricingController::class, 'destroy'])->name('delete');
+    });
+
+    // FAQ routes can be added here in the future
+    Route::prefix('faq/')->name('faq.')->group(function () {
+        Route::get('/',[FaqController::class, 'faqList'])->name('list.faq');
+        Route::get('faq-create',[FaqController::class, 'create'])->name('create.faq');
+        Route::post('faq-store',[FaqController::class, 'faqStore'])->name('store.faq');
+        Route::get('faq-edit/{id}',[FaqController::class, 'faqEdit'])->name('edit.faq');
+        Route::get('faq-delete/{id}',[FaqController::class, 'faqDelete'])->name('delete.faq');
+        Route::put('faq-update/{id}',[FaqController::class, 'faqUpdate'])->name('update.faq');
     });
 
 });

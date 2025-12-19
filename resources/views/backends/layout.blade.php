@@ -61,7 +61,7 @@
                 <ul class="pc-navbar">
                     <li class="pc-item">
                         <a href="{{ route('dashboard') }}" class="pc-link">
-                            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+                            <span class="pc-micon"><iconify-icon icon="ri:dashboard-line" width="24" height="24"></iconify-icon></span>
                             <span class="pc-mtext">Dashboard</span>
                         </a>
                     </li>
@@ -93,6 +93,12 @@
                                     href="{{ route('dashboard.skills.framework.skill') }}">Framework skill</a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{{ route('dashboard.faq.list.faq') }}" class="pc-link">
+                            <span class="pc-micon"><iconify-icon icon="ic:twotone-question-answer" width="24" height="24"></iconify-icon></span>
+                            <span class="pc-mtext">FAQ</span>
+                        </a>
                     </li>
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link">

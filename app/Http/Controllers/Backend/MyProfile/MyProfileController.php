@@ -31,7 +31,7 @@ class MyProfileController extends Controller
             'title' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'experience' => 'required',
+            'experience' => 'required', 
             'age' => 'required',
             'description' => 'required',
             'user_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation

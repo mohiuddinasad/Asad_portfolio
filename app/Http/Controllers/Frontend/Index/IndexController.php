@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Faq;
 use App\Models\Framework;
 use App\Models\Pricing;
 use App\Models\Project;
@@ -24,6 +25,7 @@ class IndexController extends Controller
         $educations = Education::all();
         $experiences = Experience::all();
         $pricings = Pricing::get();
+        $faqs = Faq::all();
         $categories = Category::withCount('projects')
             ->orderBy('order')
             ->get();
@@ -46,7 +48,7 @@ class IndexController extends Controller
 
         $showViewAll = $totalProjects > 6;
 
-        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings'));
+        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings','faqs'));
     }
 
      public function all(Request $request)

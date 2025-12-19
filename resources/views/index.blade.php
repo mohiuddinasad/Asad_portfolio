@@ -48,7 +48,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">Asad</h1>
@@ -145,39 +145,39 @@
                 <div class="col-md-6" data-aos="zoom-in">
 
                     <div class="col-lg-5">
-                       
+
                             <img src="{{ $user->user_image ? asset($user->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
                                 class="img-fluid" alt>
-                    
+
 
                     </div>
                     <div class="row justify-content-between mt-3">
                         <div class="col-lg-7 about-info p-0">
-                            
+
                                 <p><strong>Name: </strong> <span>{{ $user->name }}</span></p>
-                            
 
-                            
+
+
                                 <p><strong>Profile: </strong> <span>{{ $user->title }}</span></p>
-                         
 
-                           
+
+
                                 <p><strong>Email: </strong> <span>{{ $user->email }}</span></p>
-                        
 
-                            
+
+
                                 <p><strong>Phone: </strong> <span>{{ $user->phone }}</span></p>
-                            
-                       
+
+
 
                         </div>
                         <div class="col-lg-5 about-info p-0">
-                          
+
                                 <p><strong>Experience: </strong> <span>{{ $user->experience }} years</span></p>
-                          
+
 
                                 <p><strong>Age: </strong> <span>{{ $user->age }}</span></p>
-                        
+
 
 
 
@@ -191,9 +191,9 @@
                 <div class="col-md-6" data-aos="zoom-in">
                     <div class="about-me">
                         <h4>About me</h4>
-                      
+
                             <p> <span>{{ $user->description }}</span></p>
-                 
+
                     </div>
                 </div>
             </div>
@@ -472,59 +472,16 @@
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
 
                     <div class="faq-container">
-                        <div class="faq-item faq-active">
-                            <h3><span class="num">1.</span> <span>What technologies do you
-                                    work with?</span></h3>
-                            <div class="faq-content">
-                                <p>I work with modern web technologies including HTML, CSS,
-                                    JavaScript, Bootstrap, Tailwind CSS, PHP, and Laravel to
-                                    build professional websites and web applications.</p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
+                       @foreach ($faqs as $key => $faq)
+                           <div class="faq-item">
+                               <h3><span class="num">{{ ++$key  }}.</span> <span>{{ $faq->question }}</span></h3>
+                               <div class="faq-content">
+                                   <p>{{ $faq->answer }}</p>
+                               </div>
+                               <i class="faq-toggle bi bi-chevron-right"></i>
+                           </div><!-- End Faq item-->
+                       @endforeach
 
-                        <div class="faq-item">
-                            <h3><span class="num">2.</span> <span>Do you build responsive
-                                    websites?</span></h3>
-                            <div class="faq-content">
-                                <p>Yes, all websites I create are fully responsive and
-                                    optimized for mobile, tablet, and desktop devices.</p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
-
-                        <div class="faq-item">
-                            <h3><span class="num">3.</span> <span>Do you provide support
-                                    after the project is delivered?</span></h3>
-                            <div class="faq-content">
-                                <p>Yes, I provide 1–3 months of free support depending on
-                                    the project. Additional maintenance packages are also
-                                    available if needed.</p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
-
-                        <div class="faq-item">
-                            <h3><span class="num">4.</span> <span>Is the website
-                                    SEO-friendly?</span></h3>
-                            <div class="faq-content">
-                                <p>Yes, I follow modern coding standards and basic on-page
-                                    SEO practices to make your website SEO-friendly and
-                                    fast.</p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
-
-                        <div class="faq-item">
-                            <h3><span class="num">5.</span> <span>How do we start the
-                                    project?</span></h3>
-                            <div class="faq-content">
-                                <p>You can share your requirements → I will prepare a plan
-                                    and timeline → Confirm the budget → Project starts →
-                                    Regular updates → Final delivery.</p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
 
                     </div>
 
