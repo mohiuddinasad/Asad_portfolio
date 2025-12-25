@@ -30,12 +30,12 @@
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $faq->question }}</td>
                                 <td>{{ $faq->answer }}</td>
-                                <td>
+                                <td class="d-flex justify-content-center gap-2">
                                     <!-- Action buttons like Edit/Delete can be added here -->
                                     <a href="{{ route('dashboard.faq.edit.faq', $faq->id) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
+                                        class="btn btn-sm btn-warning"><iconify-icon icon="line-md:edit" width="24" height="24"></iconify-icon></a>
                                     <a href="{{ route('dashboard.faq.delete.faq', $faq->id) }}"
-                                        class="btn btn-sm btn-danger">Delete</a>
+                                        class="btn btn-sm btn-danger"><iconify-icon icon="material-symbols-light:delete" width="24" height="24"></iconify-icon></a>
                             </tr>
                         @endforeach
                     </tbody>
