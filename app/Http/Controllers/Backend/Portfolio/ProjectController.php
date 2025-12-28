@@ -33,7 +33,7 @@ class ProjectController extends Controller
             'link' => 'nullable|url',
             'order' => 'nullable|integer'
         ]);
-
+ 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();

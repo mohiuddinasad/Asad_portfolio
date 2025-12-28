@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style-preset.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    @stack('backend_css')
 
 
 
@@ -70,6 +71,12 @@
                             <span class="pc-micon"><iconify-icon icon="carbon:pricing-traditional" width="24"
                                     height="24"></iconify-icon></span>
                             <span class="pc-mtext">Pricing</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="{{ route('dashboard.service.index') }}" class="pc-link">
+                            <span class="pc-micon"><iconify-icon icon="mingcute:service-fill" width="24" height="24"></iconify-icon></span>
+                            <span class="pc-mtext">Service</span>
                         </a>
                     </li>
 
@@ -244,7 +251,7 @@
         </div>
     </div>
     <div id="preloader"></div>
-    <!-- [ Main Content ] end -->
+    <!-- [ Main Content ] end --> 
     <footer class="pc-footer">
 
     </footer>

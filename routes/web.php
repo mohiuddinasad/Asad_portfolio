@@ -10,11 +10,13 @@ use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
 
 
+use App\Http\Controllers\Backend\Service\ServiceDetailsController;
 use App\Http\Controllers\Backend\Skills\FrameworkController;
 use App\Http\Controllers\Backend\Skills\SkillsController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -106,19 +108,36 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
 
     // FAQ routes can be added here in the future
     Route::prefix('faq/')->name('faq.')->group(function () {
-        Route::get('/',[FaqController::class, 'faqList'])->name('list.faq');
-        Route::get('faq-create',[FaqController::class, 'create'])->name('create.faq');
-        Route::post('faq-store',[FaqController::class, 'faqStore'])->name('store.faq');
-        Route::get('faq-edit/{id}',[FaqController::class, 'faqEdit'])->name('edit.faq');
-        Route::get('faq-delete/{id}',[FaqController::class, 'faqDelete'])->name('delete.faq');
-        Route::put('faq-update/{id}',[FaqController::class, 'faqUpdate'])->name('update.faq');
+        Route::get('/', [FaqController::class, 'faqList'])->name('list.faq');
+        Route::get('faq-create', [FaqController::class, 'create'])->name('create.faq');
+        Route::post('faq-store', [FaqController::class, 'faqStore'])->name('store.faq');
+        Route::get('faq-edit/{id}', [FaqController::class, 'faqEdit'])->name('edit.faq');
+        Route::get('faq-delete/{id}', [FaqController::class, 'faqDelete'])->name('delete.faq');
+        Route::put('faq-update/{id}', [FaqController::class, 'faqUpdate'])->name('update.faq');
+    });
+
+    // service routes can be added here in the future
+
+    Route::prefix('service/')->name('service.')->group(function () {
+        // Define service-related routes here
+        Route::get('/', [ServiceDetailsController::class, 'index'])->name('index');
+        Route::get('/create-service', [ServiceDetailsController::class, 'serviceCreate'])->name('service.create');
+        Route::post('/store-service', [ServiceDetailsController::class, 'serviceStore'])->name('service.store');
+        Route::get('/edit-service/{id}', [ServiceDetailsController::class, 'serviceEdit'])->name('service.edit');
+        Route::put('/update-service/{id}', [ServiceDetailsController::class, 'serviceUpdate'])->name('service.update');
+        Route::get('/delete-service/{id}', [ServiceDetailsController::class, 'serviceDelete'])->name('service.delete');
     });
 
 });
 
 // frontend routes
 
-Route::get('/projects', [IndexController::class, 'all'])->name('projects.all');
+Route::name('frontend.')->group(function () {
+    // Additional frontend routes can be defined here
+    Route::get('/projects', action: [IndexController::class, 'all'])->name('projects.all');
+    Route::get('/service_details/{slug}', action: [IndexController::class, 'serviceDetails'])->name('service.details');
+
+});
 
 
 require __DIR__ . '/auth.php';

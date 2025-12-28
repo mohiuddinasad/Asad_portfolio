@@ -10,6 +10,7 @@ use App\Models\Faq;
 use App\Models\Framework;
 use App\Models\Pricing;
 use App\Models\Project;
+use App\Models\Service\Service;
 use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class IndexController extends Controller
         $experiences = Experience::all();
         $pricings = Pricing::get();
         $faqs = Faq::all();
+        $services = Service::all();
         $categories = Category::withCount('projects')
             ->orderBy('order')
             ->get();
@@ -48,10 +50,10 @@ class IndexController extends Controller
 
         $showViewAll = $totalProjects > 6;
 
-        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings','faqs'));
+        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings', 'faqs', 'services'));
     }
 
-     public function all(Request $request)
+    public function all(Request $request)
     {
         $categories = Category::withCount('projects')
             ->orderBy('order')
@@ -62,7 +64,7 @@ class IndexController extends Controller
         $projectsQuery = Project::with('category')->orderBy('order');
 
         if ($selectedCategory) {
-            $projectsQuery->whereHas('category', function($query) use ($selectedCategory) {
+            $projectsQuery->whereHas('category', function ($query) use ($selectedCategory) {
                 $query->where('slug', $selectedCategory);
             });
         }
@@ -70,6 +72,13 @@ class IndexController extends Controller
         $projects = $projectsQuery->paginate(12);
 
         return view('frontends.project', compact('categories', 'projects', 'selectedCategory'));
+    }
+
+    public function serviceDetails($slug)
+    {
+        $service = Service::where('slug', $slug)->firstOrFail();
+        $services = Service::all(); // Get all services including current one
+        return view('frontends.service_details', compact('service', 'services'));
     }
 
 }

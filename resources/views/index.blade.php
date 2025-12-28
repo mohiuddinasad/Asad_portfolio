@@ -198,54 +198,21 @@
 
             </div>
             <div class="row justify-content-between boxes">
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/1.jpg') }}" alt>
+                @forelse ($services as $service)
+                    <div class="col-lg-4 servise_box">
+                        <a href="{{ route('frontend.service.details', $service->slug) }}">
+                            <div class="image">
+                                <img class="img-fluid" src="{{ asset('storage/' . $service->image) }}" alt>
+                            </div>
+                            <div class="text d-flex justify-content-center align-items-center">
+                                <h4>{{ Str::limit($service->title, 18) }} </h4>
+                            </div>
+                        </a>
                     </div>
-                    <div class="text">
-                        <h4>Web Development</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/2.jpg') }}" alt>
-                    </div>
-                    <div class="text">
-                        <h4>Responsive Design</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/3.jpg') }}" alt>
-                    </div>
-                    <div class="text">
-                        <h4>E-Commerce Development</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/5.jpg') }}" alt>
-                    </div>
-                    <div class="text">
-                        <h4>Web Hosting</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/4.jpg') }}" alt>
-                    </div>
-                    <div class="text">
-                        <h4>Websites Redesign</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 servise_box">
-                    <div class="image">
-                        <img class="img-fluid" src="{{ asset('frontend/assets/img/service/6.jpg') }}" alt>
-                    </div>
-                    <div class="text">
-                        <h4>Website Security & Backup</h4>
-                    </div>
-                </div>
+                @empty
+
+                @endforelse
+
             </div>
         </div>
     </section>
@@ -304,7 +271,7 @@
 
                 </div><!-- End Portfolio Container -->
                 <div class="view_all">
-                    <a href="{{ route('projects.all') }}">View More</a>
+                    <a href="{{ route('frontend.projects.all') }}">View More</a>
                 </div>
             </div>
 
@@ -407,20 +374,20 @@
 
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  }
-                }
-              </script>
+                        {
+                          "loop": true,
+                          "speed": 600,
+                          "autoplay": {
+                            "delay": 5000
+                          },
+                          "slidesPerView": "auto",
+                          "pagination": {
+                            "el": ".swiper-pagination",
+                            "type": "bullets",
+                            "clickable": true
+                          }
+                        }
+                      </script>
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide">

@@ -1,6 +1,11 @@
 @extends('frontends.layout')
 @section('frontend_content')
+
+
+
     <!-- Portfolio Section -->
+
+
     <section id="portfolio" class="portfolio section">
 
         <!-- Section Title -->
