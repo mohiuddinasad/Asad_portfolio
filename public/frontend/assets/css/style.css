@@ -425,13 +425,12 @@ h6 {
   .offcanvas a,
   .offcanvas a:focus {
     color: var(--nav-dropdown-color);
-    padding: 8px 10px;
     font-family: var(--nav-font);
     font-size: 17px;
     font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 8px 12px;
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -460,7 +459,9 @@ h6 {
   .offcanvas a:hover,
   .offcanvas .active,
   .offcanvas .active:focus {
-    color: var(--nav-dropdown-hover-color);
+    color: #fff;
+    background-color: #065CC2;
+    border-radius: 8px;
   }
 
   .navmenu .active i,
@@ -862,8 +863,7 @@ body.dark #hero .link a {
   text-decoration: none;
   padding: 12px 40px;
   background: #065cc2;
-
-  border-radius: 8px;
+  /* border-radius: 8px; */
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 16px;
@@ -871,6 +871,7 @@ body.dark #hero .link a {
   text-align: justify;
   color: #fff;
   border-radius: 50px;
+  outline: 2px solid transparent;
   transition: 0.3s;
 }
 #hero .hire:hover {
@@ -880,10 +881,10 @@ body.dark #hero .link a {
 }
 
 #hero .cv {
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-family: var(--font-family);
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: var(--font-family);
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.03em;
@@ -896,7 +897,8 @@ body.dark #hero .link a {
 }
 
 #hero .cv:hover {
-  outline: none;
+    outline: none;
+    outline: 2px solid transparent;
   color: #fff;
   background-color: #065cc2;
 }

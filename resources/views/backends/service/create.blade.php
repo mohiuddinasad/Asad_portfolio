@@ -15,16 +15,25 @@
                     <div class="row">
                         <div class="mb-3 col-lg-6">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <input type="text" class="form-control" id="title" name="title">
+                            @error('title')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-3 col-lg-6">
                             <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control" id="slug" name="slug" required>
+                            <input type="text" class="form-control" id="slug" name="slug">
+                            @error('slug')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-lg-6 ">
                             <label for="product_details">Uploaded Images : </label>
                             <input name="image" multiple type="file" class="images form-control p-2">
+                            @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-3 col-lg-6">
                             <label class="form-label">Features</label>
@@ -57,6 +66,7 @@
                     <div class="mb-3">
                         <label for="short_description" class="form-label">Short Description</label>
                         <textarea class="form-control" id="short_description" name="short_description" rows="3"></textarea>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
@@ -107,10 +117,10 @@
                     if (featureItems.length > 1) {
                         e.target.closest('.feature-item').remove();
                     } else {
-                        alert('At least one feature field is required!');
+                        alert('At least one feature field is!');
                     }
                 }
             });
         });
     </script>
-@endpush 
+@endpush

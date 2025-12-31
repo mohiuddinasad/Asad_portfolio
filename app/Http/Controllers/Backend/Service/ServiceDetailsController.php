@@ -23,7 +23,7 @@ class ServiceDetailsController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:services,slug',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'features' => 'nullable|array',
             'features.*' => 'string|max:500',
             'short_description' => 'nullable|string|max:500',

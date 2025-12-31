@@ -12,8 +12,8 @@
                         <div  class="card col-lg-4 col-md-12 p-0 position-relative" aria-hidden="true">
                             <img style="height: 200px; object-fit: cover;" src="{{ asset('storage/' . $service->image) }}" class="img-fluid card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $service->title }}</h5>
-                                <p class="card-text">{{ $service->short_description }}</p>
+                                <h5 class="m-0 card-title">{{ $service->title }}</h5>
+
                             </div>
 
                             <div class="position-absolute top-0 end-0 m-2">

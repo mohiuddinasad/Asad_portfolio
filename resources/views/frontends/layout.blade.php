@@ -84,12 +84,15 @@
         <div class="offcanvas-body ">
 
             <ul class="nav-links p-0" style="list-style: none;">
-                <li><a href="#hero" class="nav-link active">Home<br></a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#resume" class="nav-link">Resume</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li>
+
+                    <a href="#hero" class="nav-link active"><span class="me-2 lh-1"><iconify-icon icon="ic:round-home" width="24" height="24"></iconify-icon></span>Home</a>
+                </li>
+                <li><a href="#about" class="nav-link"> <span class="me-2 lh-1"><iconify-icon icon="qlementine-icons:user-16" width="24" height="24"></iconify-icon></span> About</a></li>
+                <li><a href="#resume" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="mdi:education-outline" width="24" height="24"></iconify-icon></span> Resume</a></li>
+                <li><a href="#services" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="ic:round-home-repair-service" width="24" height="24"></iconify-icon></span> Services</a></li>
+                <li><a href="#portfolio" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="eos-icons:project" width="24" height="24"></iconify-icon></span> Project</a></li>
+                <li><a href="#contact" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="hugeicons:contact-02" width="24" height="24"></iconify-icon></span> Contact</a></li>
             </ul>
 
         </div>
@@ -166,7 +169,7 @@
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 
 
-    
+
 </body>
 
 </html>

@@ -21,8 +21,7 @@
             <div class="link">
                 <a href="https://www.facebook.com/share/1BMLXu62w3/"><iconify-icon icon="ic:baseline-facebook" width="27"
                         height="27"></iconify-icon></a>
-                <a href="https://www.instagram.com/mohiuddin_asad_?igsh=ODZ1ZWI4azRjemMz"><iconify-icon icon="mdi:instagram"
-                        width="27" height="27"></iconify-icon></a>
+                <a href="https://github.com/mohiuddinasad"><iconify-icon icon="simple-icons:github" width="27" height="27"></iconify-icon></a>
                 <a
                     href="https://www.linkedin.com/in/mohiuddin-asad-491aa4382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><iconify-icon
                         icon="mdi:linkedin" width="27" height="27"></iconify-icon></a>
@@ -31,7 +30,7 @@
             </div>
 
             <div class="contract">
-                <a class="hire col-sm-12" href="https://wa.me/8801761955564?text=Hello" class="button">Hire
+                <a class="hire button col-sm-12" href="https://wa.me/8801761955564?text=Hello" class="button">Hire
                     Me</a>
                 <a class="cv col-sm-12" href="{{ asset('frontend/assets/mohiuddin asad Resume.pdf') }}" Download>Download CV
                 </a>

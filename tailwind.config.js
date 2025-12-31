@@ -18,6 +18,6 @@ export default {
     },
 
     plugins: [forms],
-    darkMode: false,
+    darkMode: 'class',
 
 };
