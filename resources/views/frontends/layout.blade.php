@@ -10,7 +10,6 @@
 
     <!-- Favicons -->
     <link href="{{ asset('frontend/assets/img/fav icon.png') }}" rel="icon">
-    <link href="{{ asset('frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -48,10 +47,10 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
+            <a href="{{ route('home') }}" class="logos d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">Asad</h1>
+                <img src="{{ asset('frontend/assets/img/logo2.png') }}" alt="">
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -77,11 +76,10 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Mohiuddin
-                Asad</h5>
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="{{ asset('frontend/assets/img/logo2.png') }}" alt=""></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body ">
+        <div class="offcanvas-body">
 
             <ul class="nav-links p-0" style="list-style: none;">
                 <li>

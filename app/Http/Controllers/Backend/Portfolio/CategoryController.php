@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         $notification = [
             'message' => 'Category created successfully',
-            'alert-type' => 'success'
+            'alert-type' => 'success' 
         ];
 
         return redirect()->route('dashboard.portfolio.categories.index')->with($notification);

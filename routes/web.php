@@ -1,18 +1,23 @@
 <?php
 
 
+use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\Faq\FaqController;
+use App\Http\Controllers\Backend\Layout\LayoutController;
 use App\Http\Controllers\Backend\MyProfile\MyProfileController;
 use App\Http\Controllers\Backend\Portfolio\CategoryController;
 use App\Http\Controllers\Backend\Portfolio\ProjectController;
 use App\Http\Controllers\Backend\Pricing\PricingController;
+
+
 use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
-
-
+use App\Http\Controllers\Backend\Review\ReviewController;
 use App\Http\Controllers\Backend\Service\ServiceDetailsController;
+use App\Http\Controllers\Backend\Setting\SettingController;
 use App\Http\Controllers\Backend\Skills\FrameworkController;
 use App\Http\Controllers\Backend\Skills\SkillsController;
+use App\Http\Controllers\Frontend\Contact\ContactController;
 use App\Http\Controllers\Frontend\Index\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,11 +30,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
+
+
+
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,6 +52,7 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
     Route::get('profile-edit', [MyProfileController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile-info', [MyProfileController::class, 'profileInfo'])->name('profile.info');
     Route::post('/profile/password-update', [MyProfileController::class, 'passwordUpdate'])->name('profile.password.update');
+    Route::get('profile-setting', [SettingController::class, 'profileSetting'])->name('profile.setting');
 
     // skills routes
     Route::prefix('skills/')->name('skills.')->group(function () {
@@ -128,6 +137,16 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
         Route::get('/delete-service/{id}', [ServiceDetailsController::class, 'serviceDelete'])->name('service.delete');
     });
 
+    // review routes can be added here in the future
+    Route::prefix('review/')->name('review.')->group(function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('index');
+        Route::get('/create-review', [ReviewController::class, 'create'])->name('create');
+        Route::post('/store-review', [ReviewController::class, 'store'])->name('store');
+        Route::get('/edit-review/{id}', [ReviewController::class, 'edit'])->name('edit');
+        Route::put('/update-review/{id}', [ReviewController::class, 'update'])->name('update');
+        Route::get('/delete-review/{id}', [ReviewController::class, 'delete'])->name('delete');
+    });
+
 });
 
 // frontend routes
@@ -136,6 +155,8 @@ Route::name('frontend.')->group(function () {
     // Additional frontend routes can be defined here
     Route::get('/projects', action: [IndexController::class, 'all'])->name('projects.all');
     Route::get('/service_details/{slug}', action: [IndexController::class, 'serviceDetails'])->name('service.details');
+    Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+   Route::get('/contact', [ContactController::class, 'save'])->name('contact.save');
 
 });
 

@@ -33,7 +33,7 @@ class ProjectController extends Controller
             'link' => 'nullable|url',
             'order' => 'nullable|integer'
         ]);
- 
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -65,7 +65,7 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'link' => 'nullable|url',
-            'order' => 'nullable|integer'
+            'order' => 'nullable|integer' 
         ]);
 
         if ($request->hasFile('image')) {

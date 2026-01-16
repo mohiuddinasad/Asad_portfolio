@@ -21,7 +21,8 @@
             <div class="link">
                 <a href="https://www.facebook.com/share/1BMLXu62w3/"><iconify-icon icon="ic:baseline-facebook" width="27"
                         height="27"></iconify-icon></a>
-                <a href="https://github.com/mohiuddinasad"><iconify-icon icon="simple-icons:github" width="27" height="27"></iconify-icon></a>
+                <a href="https://github.com/mohiuddinasad"><iconify-icon icon="simple-icons:github" width="27"
+                        height="27"></iconify-icon></a>
                 <a
                     href="https://www.linkedin.com/in/mohiuddin-asad-491aa4382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><iconify-icon
                         icon="mdi:linkedin" width="27" height="27"></iconify-icon></a>
@@ -367,137 +368,49 @@
 
     <section id="testimonials" class="testimonials section accent-background">
 
-        <img src="{{ asset('frontend/assets/img/testimonials-bg.jpg') }}" class="testimonials-bg" alt>
+
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
-                        {
-                          "loop": true,
-                          "speed": 600,
-                          "autoplay": {
-                            "delay": 5000
-                          },
-                          "slidesPerView": "auto",
-                          "pagination": {
-                            "el": ".swiper-pagination",
-                            "type": "bullets",
-                            "clickable": true
-                          }
-                        }
-                      </script>
+                            {
+                              "loop": true,
+                              "speed": 600,
+                              "autoplay": {
+                                "delay": 5000
+                              },
+                              "slidesPerView": "auto",
+                              "pagination": {
+                                "el": ".swiper-pagination",
+                                "type": "bullets",
+                                "clickable": true
+                              }
+                            }
+                          </script>
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-1.jpg') }}"
-                                class="testimonial-img" alt>
-                            <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
+                    @foreach ($reviews as $review)
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('storage/' . $review->image) }}" class="testimonial-img" alt>
+                                <h3>{{ $review->name }}</h3>
+                                <h4>{{ $review->position }}</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>{{ $review->description }}</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
                             </div>
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Proin iaculis purus consequat sem cure digni ssim
-                                    donec porttitora entum suscipit rhoncus. Accusantium quam,
-                                    ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                    risus at semper.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-2.jpg') }}"
-                                class="testimonial-img" alt>
-                            <h3>Sara Wilsson</h3>
-                            <h4>Designer</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
-                            </div>
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Export tempor illum tamen malis malis eram quae irure
-                                    esse labore quem cillum quid cillum eram malis quorum
-                                    velit fore eram velit sunt aliqua noster fugiat irure amet
-                                    legam anim culpa.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-3.jpg') }}"
-                                class="testimonial-img" alt>
-                            <h3>Jena Karlis</h3>
-                            <h4>Store Owner</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
-                            </div>
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Enim nisi quem export duis labore cillum quae magna
-                                    enim sint quorum nulla quem veniam duis minim tempor
-                                    labore quem eram duis noster aute amet eram fore quis sint
-                                    minim.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-4.jpg') }}"
-                                class="testimonial-img" alt>
-                            <h3>Matt Brandon</h3>
-                            <h4>Freelancer</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
-                            </div>
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Fugiat enim eram quae cillum dolore dolor amet nulla
-                                    culpa multos export minim fugiat minim velit minim dolor
-                                    enim duis veniam ipsum anim magna sunt elit fore quem
-                                    dolore labore illum veniam.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-item">
-                            <img src="{{ asset('frontend/assets/img/testimonials/testimonials-5.jpg') }}"
-                                class="testimonial-img" alt>
-                            <h3>John Larson</h3>
-                            <h4>Entrepreneur</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
-                            </div>
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Quis quorum aliqua sint quem legam fore sunt eram
-                                    irure aliqua veniam tempor noster veniam enim culpa labore
-                                    duis sunt culpa nulla illum cillum fugiat legam esse
-                                    veniam culpa fore nisi cillum quid.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
-                        </div>
-                    </div>
 
                 </div>
                 <div class="swiper-pagination"></div>
@@ -539,7 +452,7 @@
                             </div>
                             <div class="text">
                                 <h5>Phone Number</h5>
-                                <p>+8801761955564</p>
+                                <p>{{ $user->phone }}</p>
                             </div>
                         </div>
                         <div class="info_item">
@@ -548,7 +461,7 @@
                             </div>
                             <div class="text">
                                 <h5>Email</h5>
-                                <p>mohiuddinasad46@gmail.com</p>
+                                <p>{{ $user->email }}</p>
                             </div>
                         </div>
                     </div>
@@ -563,37 +476,60 @@
                                 discuss your ideas and help you turn them into reality</p>
                         </div>
                         <div class="input">
-                            <form class="text-center" id="contactForm" method="POST" action="">
+                            <form class="text-center" id="" method="post" action="{{ route('frontend.contact.send') }}">
                                 @csrf
 
+                                <!-- Name -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="your name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name"
+                                        >
                                     <label for="name">Your Name</label>
+                                    @error('name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
+                                <!-- Email -->
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="your email">
+                                        placeholder="Your Email">
                                     <label for="email">Your Email</label>
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
+                                <!-- Subject -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="subject" name="subject"
-                                        placeholder="subject">
+                                        placeholder="Subject">
                                     <label for="subject">Subject</label>
+                                    @error('subject')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
+                                <!-- Message -->
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control" id="message" name="message"
-                                        placeholder="Leave a comment here" style="height: 100px"></textarea>
-                                    <label for="message">Comments</label>
+                                        placeholder="Leave a comment here"
+                                        style="height: 100px"></textarea>
+                                    <label for="message">Message</label>
+                                    @error('message')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
-                                <button type="submit" id="submitBtn">Send Message</button>
+                                <!-- Submit Button -->
+                                <button type="submit" id="submitBtn" class="btn btn-primary">Send Message</button>
 
-                                <!-- Success/Error Messages -->
-                                <div id="formMessage" style="margin-top: 15px;"></div>
+                              @if(session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
+
+    
                             </form>
+
                         </div>
                     </div>
                 </div>

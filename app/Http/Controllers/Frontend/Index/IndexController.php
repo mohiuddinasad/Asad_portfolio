@@ -10,6 +10,7 @@ use App\Models\Faq;
 use App\Models\Framework;
 use App\Models\Pricing;
 use App\Models\Project;
+use App\Models\Review\Review;
 use App\Models\Service\Service;
 use App\Models\Skills;
 use App\Models\User;
@@ -28,6 +29,7 @@ class IndexController extends Controller
         $pricings = Pricing::get();
         $faqs = Faq::all();
         $services = Service::all();
+        $reviews = Review::all();
         $categories = Category::withCount('projects')
             ->orderBy('order')
             ->get();
@@ -50,7 +52,7 @@ class IndexController extends Controller
 
         $showViewAll = $totalProjects > 6;
 
-        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings', 'faqs', 'services'));
+        return view('index', compact('skills', 'frameworkSkills', 'educations', 'experiences', 'categories', 'projects', 'showViewAll', 'user', 'pricings', 'faqs', 'services', 'reviews'));
     }
 
     public function all(Request $request)

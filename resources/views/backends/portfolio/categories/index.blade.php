@@ -30,7 +30,7 @@
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Projects Count</th>
-                                    <th>Order</th>
+                                    <th>Order</th> 
                                     <th>Action</th>
                                 </tr>
                             </thead>
