@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Faq;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,9 @@ class FaqController extends Controller
 {
     public function create()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
 
-        return view('backends.faq.faqCreate');
+        return view('backends.faq.faqCreate', compact('unreadCount'));
     }
 
     public function faqStore(Request $request)
@@ -32,8 +34,9 @@ class FaqController extends Controller
 
     public function faqList()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $faqs = Faq::all(); // Retrieve all FAQs from the database
-        return view('backends.faq.faqList', compact('faqs'));
+        return view('backends.faq.faqList', compact('faqs', 'unreadCount'));
     }
     public function faqDelete($id)
     {
@@ -44,8 +47,9 @@ class FaqController extends Controller
 
     public function faqEdit($id)
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $faq = Faq::find($id);
-        return view('backends.faq.faqEdit', compact('faq'));
+        return view('backends.faq.faqEdit', compact('faq', 'unreadCount'));
     }
 
     public function faqUpdate(Request $request, $id)

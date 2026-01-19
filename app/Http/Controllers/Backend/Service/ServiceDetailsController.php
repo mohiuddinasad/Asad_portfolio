@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Service;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Service\Service;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,14 @@ class ServiceDetailsController extends Controller
 {
     public function index()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $services = Service::get();
-        return view('backends.service.index', compact('services'));
+        return view('backends.service.index', compact('services', 'unreadCount'));
     }
     public function serviceCreate()
     {
-        return view('backends.service.create');
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        return view('backends.service.create', compact('unreadCount'));
     }
 
     public function serviceStore(Request $request)
@@ -65,8 +68,9 @@ class ServiceDetailsController extends Controller
     // service edit
     public function serviceEdit($id)
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $service = Service::findOrFail($id);
-        return view('backends.service.edit', compact('service'));
+        return view('backends.service.edit', compact('service', 'unreadCount'));
     }
 
     public function serviceUpdate(Request $request, $id)

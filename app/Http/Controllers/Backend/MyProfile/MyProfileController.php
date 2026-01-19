@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Backend\MyProfile;
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,14 +15,16 @@ class MyProfileController extends Controller
 
     public function profileView()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $user = Auth::user();
-        return view('backends.myProfile.profileView', compact('user'));
+        return view('backends.myProfile.profileView', compact('user', 'unreadCount'));
     }
 
     public function profileEdit()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $user = Auth::user();
-        return view('backends.myProfile.editProfile', compact('user'));
+        return view('backends.myProfile.editProfile', compact('user', 'unreadCount'));
 
     }
     public function profileInfo(Request $request)
@@ -31,7 +34,7 @@ class MyProfileController extends Controller
             'title' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'experience' => 'required', 
+            'experience' => 'required',
             'age' => 'required',
             'description' => 'required',
             'user_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation

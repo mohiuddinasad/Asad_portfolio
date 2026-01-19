@@ -33,7 +33,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style-preset.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+
     @stack('backend_css')
+
 
 
 
@@ -97,8 +99,7 @@
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link">
                             <span class="pc-micon">
-                                <iconify-icon icon="carbon:skill-level-basic" width="22"
-                                    height="22"></iconify-icon>
+                                <iconify-icon icon="carbon:skill-level-basic" width="22" height="22"></iconify-icon>
                             </span>
                             <span class="pc-mtext">Skills</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
@@ -139,8 +140,7 @@
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link">
                             <span class="pc-micon">
-                                <iconify-icon icon="eos-icons:project-outlined" width="24"
-                                    height="24"></iconify-icon>
+                                <iconify-icon icon="eos-icons:project-outlined" width="24" height="24"></iconify-icon>
                             </span>
                             <span class="pc-mtext">Portfolio</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
@@ -176,8 +176,8 @@
                         </a>
                     </li>
                     <li class="dropdown pc-h-item d-inline-flex d-md-none">
-                        <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="ti ti-search"></i>
                         </a>
                         <div class="dropdown-menu pc-h-dropdown drp-search">
@@ -202,186 +202,149 @@
             <div class="ms-auto">
                 <ul class="list-unstyled">
                     <li class="dropdown pc-h-item">
-                        <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a style="position: relative;" href="{{ route('dashboard.dashboard.messages') }}"
+                            class="pc-head-link me-0 position-relative">
                             <i class="ti ti-mail"></i>
+                            @if($unreadCount > 0)
+                            <span style="
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            display: flex;
+                            font-size: 10px;
+                            align-items: center;
+                            justify-content: center;
+                            top: 6px;
+                            right: 4px;" class="pc-badge-label bg-danger rounded-circle">{{ $unreadCount }}</span>
+
+                            @endif
                         </a>
-                        <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-                            <div class="dropdown-header d-flex align-items-center justify-content-between">
-                                <h5 class="m-0">Message</h5>
-                                <a href="#!" class="pc-head-link bg-transparent"><i
-                                        class="ti ti-x text-danger"></i></a>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative"
-                                style="max-height: calc(100vh - 215px)">
-                                <div class="list-group list-group-flush w-100">
 
-
-                                    @if (session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    @isset($messages)
-                                        @forelse ($messages as $message)
-                                            <a class="list-group-item list-group-item-action">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="{{ asset('backend/assets/images/user/avatar-2.jpg') }}"
-                                                            alt="user-image" class="user-avtar">
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-1">
-                                                        <span class="float-end text-muted"></span>
-                                                        <p class="text-body mb-1"><b>{{ $message->name }}</b></p>
-                                                        <span
-                                                            class="text-muted">{{ $message->created_at->diffForHumans() }}</span>
-                                                        <p>{{ $message->subject }}</p>
-                                                        <p>{{ $message->message }}</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        @empty
-                                            <p>No messages found.</p>
-                                        @endforelse
-                                    @endisset
-
-
-
+                    </li>
+                    <li class="dropdown pc-h-item header-user-profile">
+                        <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
+                            <img src="{{ Auth::user()->user_image ? asset(Auth::user()->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
+                                alt="user-image" class="user-avtar">
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+                            <div class="dropdown-header">
+                                <div class="d-flex mb-1">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ Auth::user()->user_image ? asset(Auth::user()->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
+                                            alt="user-image" class="user-avtar wid-35">
                                     </div>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <div class="text-center py-2">
-                                    <a href="#!" class="link-primary">View all</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown pc-h-item header-user-profile">
-                            <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                                href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside"
-                                aria-expanded="false">
-                                <img src="{{ Auth::user()->user_image ? asset(Auth::user()->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
-                                    alt="user-image" class="user-avtar">
-                                <span>{{ Auth::user()->name }}</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
-                                <div class="dropdown-header">
-                                    <div class="d-flex mb-1">
-                                        <div class="flex-shrink-0">
-                                            <img src="{{ Auth::user()->user_image ? asset(Auth::user()->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
-                                                alt="user-image" class="user-avtar wid-35">
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-1">{{ Auth::user()->name }}</h6>
-                                            <span>{{ Auth::user()->title }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="drp-t1" data-bs-toggle="tab"
-                                            data-bs-target="#drp-tab-1" type="button" role="tab"
-                                            aria-controls="drp-tab-1" aria-selected="true"><i class="ti ti-user"></i>
-                                            Profile</button>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="mysrpTabContent">
-                                    <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel"
-                                        aria-labelledby="drp-t1" tabindex="0">
-                                        <a href="{{ route('dashboard.profile.edit') }}" class="dropdown-item">
-                                            <i class="ti ti-edit-circle"></i>
-                                            <span>Edit Profile</span>
-                                        </a>
-                                        <a href="{{ route('dashboard.my.profile') }}" class="dropdown-item">
-                                            <i class="ti ti-user"></i>
-                                            <span>View Profile</span>
-                                        </a>
-                                        <a href="{{ route('dashboard.profile.setting') }}" class="dropdown-item">
-                                            <i class="ti ti-settings"></i>
-                                            <span>Setting</span>
-                                        </a>
-                                        <a href="{{ route('logout') }}" class="dropdown-item">
-                                            <i class="ti ti-power"></i>
-                                            <span>Logout</span>
-                                        </a>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-1">{{ Auth::user()->name }}</h6>
+                                        <span>{{ Auth::user()->title }}</span>
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-        <!-- [ Header ] end -->
-
-
-
-        <!-- [ Main Content ] start -->
-        <div class="pc-container">
-            <div class="pc-content">
-                @yield('backend_content')
+                            <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="drp-t1" data-bs-toggle="tab"
+                                        data-bs-target="#drp-tab-1" type="button" role="tab" aria-controls="drp-tab-1"
+                                        aria-selected="true"><i class="ti ti-user"></i>
+                                        Profile</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="mysrpTabContent">
+                                <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel"
+                                    aria-labelledby="drp-t1" tabindex="0">
+                                    <a href="{{ route('dashboard.profile.edit') }}" class="dropdown-item">
+                                        <i class="ti ti-edit-circle"></i>
+                                        <span>Edit Profile</span>
+                                    </a>
+                                    <a href="{{ route('dashboard.my.profile') }}" class="dropdown-item">
+                                        <i class="ti ti-user"></i>
+                                        <span>View Profile</span>
+                                    </a>
+                                    <a href="{{ route('dashboard.profile.setting') }}" class="dropdown-item">
+                                        <i class="ti ti-settings"></i>
+                                        <span>Setting</span>
+                                    </a>
+                                    <a href="{{ route('logout') }}" class="dropdown-item">
+                                        <i class="ti ti-power"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div id="preloader"></div>
-        <!-- [ Main Content ] end -->
-        <footer class="pc-footer">
-
-        </footer>
-
-        <!-- [Page Specific JS] start -->
-        <script src="{{ asset('backend/assets/js/plugins/apexcharts.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/pages/dashboard-default.js') }}"></script>
-        <!-- [Page Specific JS] end -->
-        <!-- Required Js -->
-        <script src="{{ asset('backend/assets/js/plugins/popper.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/plugins/simplebar.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/plugins/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/fonts/custom-font.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/pcoded.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/plugins/feather.min.js') }}"></script>
-        <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
-        <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-
-        <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    </header>
+    <!-- [ Header ] end -->
 
 
 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+        <div class="pc-content">
+            @yield('backend_content')
+        </div>
+    </div>
+    <div id="preloader"></div>
+    <!-- [ Main Content ] end -->
+    <footer class="pc-footer">
+
+    </footer>
+
+    <!-- [Page Specific JS] start -->
+    <script src="{{ asset('backend/assets/js/plugins/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/pages/dashboard-default.js') }}"></script>
+    <!-- [Page Specific JS] end -->
+    <!-- Required Js -->
+    <script src="{{ asset('backend/assets/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/plugins/simplebar.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/plugins/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/fonts/custom-font.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/pcoded.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/plugins/feather.min.js') }}"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
 
 
 
 
-        <script>
-            layout_change('light');
-        </script>
+
+
+
+    <script>
+        layout_change('light');
+    </script>
 
 
 
 
-        <script>
-            change_box_container('false');
-        </script>
+    <script>
+        change_box_container('false');
+    </script>
 
 
 
-        <script>
-            layout_rtl_change('false');
-        </script>
+    <script>
+        layout_rtl_change('false');
+    </script>
 
 
-        <script>
-            preset_change("preset-1");
-        </script>
+    <script>
+        preset_change("preset-1");
+    </script>
 
 
-        <script>
-            font_change("Public-Sans");
-        </script>
-        @stack('backend_js')
+    <script>
+        font_change("Public-Sans");
+    </script>
+    @stack('backend_js')
 
 
 
-    </body>
-    <!-- [Body] end -->
+</body>
+<!-- [Body] end -->
 
-    </html>
+</html>

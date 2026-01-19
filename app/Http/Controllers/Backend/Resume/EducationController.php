@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Resume;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Education;  // এই line টি add করুন
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,10 +12,11 @@ class EducationController extends Controller
 {
     public function Education()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $educations = Education::where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('backends.resume.education', compact('educations'));
+        return view('backends.resume.education', compact('educations', 'unreadCount'));
     }
 
     public function store(Request $request)

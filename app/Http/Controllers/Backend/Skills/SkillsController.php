@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Skills;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Contact\ContactMessage;
 use App\Models\Skills;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,9 @@ class SkillsController extends Controller
 {
     public function codingSkill()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $skills = Skills::get();
-        return view('backends.skills.codingSkill', compact('skills'));
+        return view('backends.skills.codingSkill', compact('skills', 'unreadCount'));
     }
 
 

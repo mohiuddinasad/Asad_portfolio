@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Review;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Review\Review;
 use Illuminate\Http\Request;
 
@@ -10,13 +11,15 @@ class ReviewController extends Controller
 {
     public function index()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $reviews = Review::all();
-        return view('backends.review.index', compact('reviews'));
+        return view('backends.review.index', compact('reviews', 'unreadCount'));
     }
 
     public function create()
     {
-        return view('backends.review.create');
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        return view('backends.review.create', compact('unreadCount'));
     }
 
     public function store(Request $request)
@@ -53,8 +56,9 @@ class ReviewController extends Controller
 
     public function edit($id)
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $review = Review::findOrFail($id);
-        return view('backends.review.edit', compact('review'));
+        return view('backends.review.edit', compact('review', 'unreadCount'));
     }
 
     public function update(Request $request, $id)

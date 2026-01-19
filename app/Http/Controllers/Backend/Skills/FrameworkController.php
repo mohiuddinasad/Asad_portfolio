@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Backend\Skills;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Framework;
 use Illuminate\Http\Request;
 
 class FrameworkController extends Controller
 {
-    public function frameworkSkill(){
-         $frameworkSkills = Framework::latest()->get();
-        return view('backends.skills.framework', compact('frameworkSkills'));
+    public function frameworkSkill()
+    {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        $frameworkSkills = Framework::latest()->get();
+        return view('backends.skills.framework', compact('frameworkSkills', 'unreadCount'));
     }
 
     public function store(Request $request)

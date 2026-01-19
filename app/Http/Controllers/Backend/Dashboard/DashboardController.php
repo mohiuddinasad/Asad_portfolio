@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Project;
 use App\Models\Service\Service;
 use App\Models\Visitor;
@@ -17,6 +18,7 @@ class DashboardController extends Controller
         $totalVisitors = Visitor::count();
         $totalProjects = Project::count();
         $totalServices = Service::count();
+        $unreadCount = ContactMessage::where('is_read', false)->count();
 
         // Today's visitors
         $todayVisitors = Visitor::whereDate('visited_at', today())->count();
@@ -49,7 +51,8 @@ class DashboardController extends Controller
             'totalServices',
             'todayVisitors',
             'last7Days',
-            'monthlyVisitors'
+            'monthlyVisitors',
+            'unreadCount'
         ));
     }
 }

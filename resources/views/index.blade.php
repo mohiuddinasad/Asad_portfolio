@@ -476,48 +476,40 @@
                                 discuss your ideas and help you turn them into reality</p>
                         </div>
                         <div class="input">
-                            <form class="text-center" id="" method="post" action="{{ route('frontend.contact.send') }}">
+                            <form class="text-center" id="" method="post" action="{{ route('frontend.contact.store') }}">
                                 @csrf
 
                                 <!-- Name -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name"
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Your Name"
                                         >
                                     <label for="name">Your Name</label>
-                                    @error('name')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+
                                 </div>
 
                                 <!-- Email -->
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" name="email"
+                                    <input type="email" class="form-control" id="email" value="{{ old('email') }}" name="email"
                                         placeholder="Your Email">
                                     <label for="email">Your Email</label>
-                                    @error('email')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+
                                 </div>
 
                                 <!-- Subject -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="subject" name="subject"
+                                    <input type="text" class="form-control" id="subject" value="{{ old('subject') }}" name="subject"
                                         placeholder="Subject">
                                     <label for="subject">Subject</label>
-                                    @error('subject')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+
                                 </div>
 
                                 <!-- Message -->
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control" id="message" name="message"
                                         placeholder="Leave a comment here"
-                                        style="height: 100px"></textarea>
+                                        style="height: 100px">{{ old('message') }}</textarea>
                                     <label for="message">Message</label>
-                                    @error('message')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+
                                 </div>
 
                                 <!-- Submit Button -->
@@ -527,7 +519,7 @@
         <p style="color: green;">{{ session('success') }}</p>
     @endif
 
-    
+
                             </form>
 
                         </div>

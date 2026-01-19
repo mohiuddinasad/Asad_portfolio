@@ -5,19 +5,22 @@ namespace App\Http\Controllers\Backend\Portfolio;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Contact\ContactMessage;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $categories = Category::withCount('projects')->orderBy('order')->get();
-        return view('backends.portfolio.categories.index', compact('categories'));
+        return view('backends.portfolio.categories.index', compact('categories', 'unreadCount'));
     }
 
     public function create()
     {
-        return view('backends.portfolio.categories.create');
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        return view('backends.portfolio.categories.create', compact('unreadCount'));
     }
 
     public function store(Request $request)
@@ -31,7 +34,7 @@ class CategoryController extends Controller
 
         $notification = [
             'message' => 'Category created successfully',
-            'alert-type' => 'success' 
+            'alert-type' => 'success'
         ];
 
         return redirect()->route('dashboard.portfolio.categories.index')->with($notification);
@@ -39,7 +42,8 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('backends.portfolio.categories.edit', compact('category'));
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        return view('backends.portfolio.categories.edit', compact('category', 'unreadCount'));
     }
 
     public function update(Request $request, Category $category)

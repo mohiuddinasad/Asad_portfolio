@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Portfolio;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Contact\ContactMessage;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,14 +14,16 @@ class ProjectController extends Controller
 {
     public function index()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $projects = Project::with('category')->orderBy('order')->get();
-        return view('backends.portfolio.projects.index', compact('projects'));
+        return view('backends.portfolio.projects.index', compact('projects', 'unreadCount'));
     }
 
     public function create()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $categories = Category::orderBy('name')->latest()->get();
-        return view('backends.portfolio.projects.create', compact('categories'));
+        return view('backends.portfolio.projects.create', compact('categories', 'unreadCount'));
     }
 
     public function store(Request $request)
@@ -53,8 +56,9 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $categories = Category::orderBy('name')->get();
-        return view('backends.portfolio.projects.edit', compact('project', 'categories'));
+        return view('backends.portfolio.projects.edit', compact('project', 'categories', 'unreadCount'));
     }
 
     public function update(Request $request, Project $project)
@@ -65,7 +69,7 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'link' => 'nullable|url',
-            'order' => 'nullable|integer' 
+            'order' => 'nullable|integer'
         ]);
 
         if ($request->hasFile('image')) {

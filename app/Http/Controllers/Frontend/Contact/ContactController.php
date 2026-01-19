@@ -3,33 +3,61 @@
 namespace App\Http\Controllers\Frontend\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Models\Contact\Contact;
+use App\Models\Contact\ContactMessage;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    // মেসেজ পাঠানো
-    public function send(Request $request)
+    public function store(Request $request)
     {
-        $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'required|string|max:2000',
         ]);
 
-        // সহজভাবে create ব্যবহার করুন
-        Contact::create($request->only('name', 'email', 'subject', 'message'));
+        ContactMessage::create($validated);
 
-        // মেসেজ পাঠানোর পর লিস্ট পেজে রিডাইরেক্ট করুন
-        return redirect()->route('frontend.contact.save')
-                         ->with('success', 'Your message has been sent successfully!');
+        return back()->with('success', 'Thank you! Your message has been sent successfully.');
+    }
+    public function layout()
+    {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+
+        return view('backends.layout', compact('unreadCount'));
+    }
+    // Dashboard: Show all messages
+
+    public function dashboard()
+    {
+        $messages = ContactMessage::latest()->paginate(10);
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+
+
+        return view('backends.message.messageList', compact('messages', 'unreadCount'));
     }
 
-    // সব মেসেজ দেখানো
-    public function save()
+    // Show single message
+    public function show($id)
     {
-        $messages = Contact::latest()->get(); // সর্বশেষ মেসেজ আগে দেখাবে
-        return view('backends.layout', compact('messages'));
+        $message = ContactMessage::findOrFail($id);
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+
+        // Mark as read
+        if (!$message->is_read) {
+            $message->update(['is_read' => true]);
+        }
+
+        return view('backends.message.message-detail', compact('message', 'unreadCount'));
+    }
+
+    // Delete message
+    public function destroy($id)
+    {
+        $message = ContactMessage::findOrFail($id);
+        $message->delete();
+
+        return redirect()->route('dashboard.dashboard.messages')->with('success', 'Message deleted successfully.');
     }
 }

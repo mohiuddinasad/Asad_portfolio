@@ -25,16 +25,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
-
-
-
-
-
-
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -47,6 +37,13 @@ Route::middleware('auth')->group(function () {
 
 // backend route
 Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified'])->group(function () {
+    // contact route
+
+    Route::get('/layout/messages', [ContactController::class, 'layout'])->name('layout.messages');
+    Route::get('/dashboard/messages', [ContactController::class, 'dashboard'])->name('dashboard.messages');
+    Route::get('/dashboard/messages/{id}', [ContactController::class, 'show'])->name('dashboard.messages.show');
+    Route::delete('/dashboard/messages/{id}', [ContactController::class, 'destroy'])->name('dashboard.messages.destroy');
+
     // My profile routes
     Route::get('my-profile', [MyProfileController::class, 'profileView'])->name('my.profile');
     Route::get('profile-edit', [MyProfileController::class, 'profileEdit'])->name('profile.edit');
@@ -155,8 +152,9 @@ Route::name('frontend.')->group(function () {
     // Additional frontend routes can be defined here
     Route::get('/projects', action: [IndexController::class, 'all'])->name('projects.all');
     Route::get('/service_details/{slug}', action: [IndexController::class, 'serviceDetails'])->name('service.details');
-    Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-   Route::get('/contact', [ContactController::class, 'save'])->name('contact.save');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 
 });
 

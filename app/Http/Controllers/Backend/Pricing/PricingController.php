@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Pricing;
 use App\Http\Controllers\Controller;
+use App\Models\Contact\ContactMessage;
 use App\Models\Pricing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +14,9 @@ class PricingController extends Controller
      */
     public function index()
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $pricings = Pricing::latest()->get();
-        return view('backends.pricing.index', compact('pricings'));
+        return view('backends.pricing.index', compact('pricings', 'unreadCount'));
     }
 
     /**
@@ -22,7 +24,8 @@ class PricingController extends Controller
      */
     public function create()
     {
-        return view('backends.pricing.create');
+        $unreadCount = ContactMessage::where('is_read', false)->count();
+        return view('backends.pricing.create', compact('unreadCount'));
     }
 
     /**
@@ -71,8 +74,9 @@ class PricingController extends Controller
      */
     public function edit($id)
     {
+        $unreadCount = ContactMessage::where('is_read', false)->count();
         $pricing = Pricing::findOrFail($id);
-        return view('backends.pricing.edit', compact('pricing'));
+        return view('backends.pricing.edit', compact('pricing', 'unreadCount'));
     }
 
     /**
