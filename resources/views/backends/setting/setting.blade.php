@@ -247,6 +247,14 @@
         .social-form-grid {
             grid-template-columns: 1fr;
         }
+        .social-link-item{
+            width: 550px;
+        }
+
+        .link_list {
+            overflow-x: auto;
+
+        }
     }
 </style>
 
@@ -264,10 +272,10 @@
     <!-- Logo and CV Settings -->
     <div class="settings-card">
         <h2 class="card-title">General Settings</h2>
-        
+
         <form action="{{ route('dashboard.admin.settings.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            
+
             <!-- Logo Section -->
             <div class="form-group">
                 <label class="form-label">Logo</label>
@@ -320,13 +328,11 @@
         </form>
 
         <!-- Social Links List -->
-        <div>
+        <div class="link_list">
             @forelse($socialLinks as $link)
-                <div class="social-link-item">
-                    <div class="social-info">
-                        <div class="social-icon">
-                            <i class="{{ $link->icon }}"></i>
-                        </div>
+                <div class="row social-link-item">
+                    <div class="social-info col-8">
+
                         <div class="social-details">
                             <h4>{{ $link->platform }}</h4>
                             <a href="{{ $link->url }}" target="_blank" class="social-url">
@@ -334,7 +340,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="social-actions">
+                    <div class="social-actions col-4 d-flex justify-content-end align-items-center">
                         <form action="{{ route('dashboard.admin.social-links.toggle', $link) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn-toggle {{ $link->is_active ? 'active' : 'inactive' }}">
