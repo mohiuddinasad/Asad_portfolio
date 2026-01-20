@@ -57,7 +57,7 @@
             <div class="m-header">
                 <a href="{{ route('dashboard') }}" class="b-brand text-primary">
                     <!-- ========   Change your logo from here   ============ -->
-                    <img src="{{ asset('frontend\assets\img\logo2.png') }}" alt="logo" class="logo logo-lg">
+                    <h4 class="logo-text">Mohiuddin Asad</h4>
                 </a>
             </div>
             <div class="navbar-content">

@@ -50,7 +50,7 @@
             <a href="{{ route('home') }}" class="logos d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <img src="{{ asset('frontend/assets/img/logo2.png') }}" alt="">
+                <img src="{{ Storage::url($logo) }}" alt="">
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -76,7 +76,8 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="{{ asset('frontend/assets/img/logo2.png') }}" alt=""></h5>
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img
+                    src="{{ asset('frontend/assets/img/logo2.png') }}" alt=""></h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -84,13 +85,23 @@
             <ul class="nav-links p-0" style="list-style: none;">
                 <li>
 
-                    <a href="#hero" class="nav-link active"><span class="me-2 lh-1"><iconify-icon icon="ic:round-home" width="24" height="24"></iconify-icon></span>Home</a>
+                    <a href="#hero" class="nav-link active"><span class="me-2 lh-1"><iconify-icon icon="ic:round-home"
+                                width="24" height="24"></iconify-icon></span>Home</a>
                 </li>
-                <li><a href="#about" class="nav-link"> <span class="me-2 lh-1"><iconify-icon icon="qlementine-icons:user-16" width="24" height="24"></iconify-icon></span> About</a></li>
-                <li><a href="#resume" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="mdi:education-outline" width="24" height="24"></iconify-icon></span> Resume</a></li>
-                <li><a href="#services" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="ic:round-home-repair-service" width="24" height="24"></iconify-icon></span> Services</a></li>
-                <li><a href="#portfolio" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="eos-icons:project" width="24" height="24"></iconify-icon></span> Project</a></li>
-                <li><a href="#contact" class="nav-link">  <span class="me-2 lh-1"><iconify-icon icon="hugeicons:contact-02" width="24" height="24"></iconify-icon></span> Contact</a></li>
+                <li><a href="#about" class="nav-link"> <span class="me-2 lh-1"><iconify-icon
+                                icon="qlementine-icons:user-16" width="24" height="24"></iconify-icon></span> About</a>
+                </li>
+                <li><a href="#resume" class="nav-link"> <span class="me-2 lh-1"><iconify-icon
+                                icon="mdi:education-outline" width="24" height="24"></iconify-icon></span> Resume</a>
+                </li>
+                <li><a href="#services" class="nav-link"> <span class="me-2 lh-1"><iconify-icon
+                                icon="ic:round-home-repair-service" width="24" height="24"></iconify-icon></span>
+                        Services</a></li>
+                <li><a href="#portfolio" class="nav-link"> <span class="me-2 lh-1"><iconify-icon
+                                icon="eos-icons:project" width="24" height="24"></iconify-icon></span> Project</a></li>
+                <li><a href="#contact" class="nav-link"> <span class="me-2 lh-1"><iconify-icon
+                                icon="hugeicons:contact-02" width="24" height="24"></iconify-icon></span> Contact</a>
+                </li>
             </ul>
 
         </div>
@@ -103,28 +114,23 @@
     <footer id="footer">
         <div class="container text-center">
             <div class="logo">
-                <h4>Asad</h4>
+                <img src="{{ Storage::url($logo) }}" alt="">
             </div>
             <div class="link">
-                <a href="https://www.facebook.com/share/1BMLXu62w3/"><iconify-icon icon="ic:baseline-facebook"
-                        width="27" height="27"></iconify-icon></a>
-                <a href="https://www.instagram.com/mohiuddin_asad_?igsh=ODZ1ZWI4azRjemMz"><iconify-icon
-                        icon="mdi:instagram" width="27" height="27"></iconify-icon></a>
-                <a
-                    href="https://www.linkedin.com/in/mohiuddin-asad-491aa4382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><iconify-icon
-                        icon="mdi:linkedin" width="27" height="27"></iconify-icon></a>
-                <a href="https://wa.me/8801761955564?text=Hello"><iconify-icon icon="ic:baseline-whatsapp" width="27"
-                        height="27"></iconify-icon></a>
+                @foreach ($socialLinks as $social)
+                    <a href="{{ $social->url }}" target="_blank"><iconify-icon icon="{{ $social->icon }}" width="27"
+                            height="27"></iconify-icon></a>
+                @endforeach
             </div>
             <div class="contact d-flex align-items-center justify-content-center">
                 <div class="email">
-                    <a href="mailto:mohiuddinasad46@gmail.com"><span><iconify-icon icon="ic:outline-email" width="24"
-                                height="24"></iconify-icon></span>mohiuddinasad46@gmail.com</a>
+                    <a href="mailto:{{ $user->email }}"><span><iconify-icon icon="ic:outline-email" width="24"
+                                height="24"></iconify-icon></span>{{ $user->email }}</a>
                 </div>
                 <div class="phone">
-                    <a href="tel:+8801761955564"><span>
+                    <a href="tel:{{ $user->phone }}"><span>
                             <iconify-icon icon="mingcute:phone-line" width="24" height="24"></iconify-icon></span>
-                        +8801761955564
+                        {{ $user->phone }}
                     </a>
                 </div>
             </div>

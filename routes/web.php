@@ -3,13 +3,10 @@
 
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\Faq\FaqController;
-use App\Http\Controllers\Backend\Layout\LayoutController;
 use App\Http\Controllers\Backend\MyProfile\MyProfileController;
 use App\Http\Controllers\Backend\Portfolio\CategoryController;
 use App\Http\Controllers\Backend\Portfolio\ProjectController;
 use App\Http\Controllers\Backend\Pricing\PricingController;
-
-
 use App\Http\Controllers\Backend\Resume\EducationController;
 use App\Http\Controllers\Backend\Resume\ExperienceController;
 use App\Http\Controllers\Backend\Review\ReviewController;
@@ -49,7 +46,16 @@ Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth', 'verified']
     Route::get('profile-edit', [MyProfileController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile-info', [MyProfileController::class, 'profileInfo'])->name('profile.info');
     Route::post('/profile/password-update', [MyProfileController::class, 'passwordUpdate'])->name('profile.password.update');
+
+
+    // setting route
     Route::get('profile-setting', [SettingController::class, 'profileSetting'])->name('profile.setting');
+    Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+    Route::post('/social-links', [SettingController::class, 'storeSocialLink'])->name('admin.social-links.store');
+    Route::put('/social-links/{socialLink}', [SettingController::class, 'updateSocialLink'])->name('admin.social-links.update');
+    Route::delete('/social-links/{socialLink}', [SettingController::class, 'destroySocialLink'])->name('admin.social-links.destroy');
+    Route::post('/social-links/{socialLink}/toggle', [SettingController::class, 'toggleSocialLink'])->name('admin.social-links.toggle');
+
 
     // skills routes
     Route::prefix('skills/')->name('skills.')->group(function () {

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="contains">
                 <span>Hello I am</span>
-                @if(Auth::check())
+                @if (Auth::check())
                     <h4>{{ Auth::user()->name }}</h4>
                 @else
                     <h4>Mohiuddin Asad</h4>
@@ -19,21 +19,16 @@
             </div>
 
             <div class="link">
-                <a href="https://www.facebook.com/share/1BMLXu62w3/"><iconify-icon icon="ic:baseline-facebook" width="27"
+                @foreach ($socialLinks as $social)
+                    <a href="{{ $social->url }}" target="_blank"><iconify-icon icon="{{ $social->icon }}" width="27"
                         height="27"></iconify-icon></a>
-                <a href="https://github.com/mohiuddinasad"><iconify-icon icon="simple-icons:github" width="27"
-                        height="27"></iconify-icon></a>
-                <a
-                    href="https://www.linkedin.com/in/mohiuddin-asad-491aa4382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><iconify-icon
-                        icon="mdi:linkedin" width="27" height="27"></iconify-icon></a>
-                <a href="https://wa.me/8801761955564?text=Hello"><iconify-icon icon="ic:baseline-whatsapp" width="27"
-                        height="27"></iconify-icon></a>
+                @endforeach
             </div>
 
             <div class="contract">
                 <a class="hire button col-sm-12" href="https://wa.me/8801761955564?text=Hello" class="button">Hire
                     Me</a>
-                <a class="cv col-sm-12" href="{{ asset('frontend/assets/mohiuddin asad Resume.pdf') }}" Download>Download CV
+                <a class="cv col-sm-12" href="{{ Storage::url($cv) }}" Download>Download CV
                 </a>
             </div>
         </div>
@@ -126,7 +121,6 @@
                             </div>
                         </div>
                     @empty
-
                     @endforelse
 
                 </div>
@@ -139,11 +133,11 @@
                                 <span>{{ $frameworkSkill->percentage }}%</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress" data-percent="{{ $frameworkSkill->percentage }}" data-color="#0099ff">
+                                <div class="progress" data-percent="{{ $frameworkSkill->percentage }}"
+                                    data-color="#0099ff">
                                 </div>
                             </div>
                         </div>
-
                     @endforeach
 
                 </div>
@@ -210,7 +204,6 @@
                         </a>
                     </div>
                 @empty
-
                 @endforelse
 
             </div>
@@ -252,8 +245,9 @@
                                     class="glightbox preview-link">
                                     <i class="bi bi-zoom-in"></i>
                                 </a>
-                                @if($project->link)
-                                    <a href="{{ $project->link }}" title="More Details" class="details-link" target="_blank">
+                                @if ($project->link)
+                                    <a href="{{ $project->link }}" title="More Details" class="details-link"
+                                        target="_blank">
                                         <i class="bi bi-link-45deg"></i>
                                     </a>
                                 @endif
@@ -303,8 +297,8 @@
                                     <span>{{ $pricing->subtitle }}</span>
                                     <h4>{{ $pricing->title }}</h4>
                                     <h5>${{ $pricing->price }}</h5>
-                                    @if($pricing->features && count($pricing->features) > 0)
-                                        @foreach($pricing->features as $feature)
+                                    @if ($pricing->features && count($pricing->features) > 0)
+                                        @foreach ($pricing->features as $feature)
                                             <p>{{ $feature }}</p>
                                         @endforeach
                                     @endif
@@ -345,7 +339,8 @@
                     <div class="faq-container">
                         @foreach ($faqs as $key => $faq)
                             <div class="faq-item">
-                                <h3><span class="num">{{ ++$key  }}.</span> <span>{{ $faq->question }}</span></h3>
+                                <h3><span class="num">{{ ++$key }}.</span> <span>{{ $faq->question }}</span>
+                                </h3>
                                 <div class="faq-content">
                                     <p>{{ $faq->answer }}</p>
                                 </div>
@@ -367,9 +362,7 @@
 
 
     <section id="testimonials" class="testimonials section accent-background">
-
-
-
+        <img src="{{ asset('frontend/assets/img/testimonials-bg.jpg') }}" class="testimonials-bg" alt>
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="swiper init-swiper">
@@ -439,7 +432,8 @@
                         </div>
                         <div class="info_item">
                             <div class="icon">
-                                <span><iconify-icon icon="tdesign:location" width="24" height="24"></iconify-icon></span>
+                                <span><iconify-icon icon="tdesign:location" width="24"
+                                        height="24"></iconify-icon></span>
                             </div>
                             <div class="text">
                                 <h5>Location</h5>
@@ -448,7 +442,8 @@
                         </div>
                         <div class="info_item">
                             <div class="icon">
-                                <span><iconify-icon icon="hugeicons:call-02" width="24" height="24"></iconify-icon></span>
+                                <span><iconify-icon icon="hugeicons:call-02" width="24"
+                                        height="24"></iconify-icon></span>
                             </div>
                             <div class="text">
                                 <h5>Phone Number</h5>
@@ -457,7 +452,8 @@
                         </div>
                         <div class="info_item">
                             <div class="icon">
-                                <span><iconify-icon icon="tabler:mail" width="24" height="24"></iconify-icon></span>
+                                <span><iconify-icon icon="tabler:mail" width="24"
+                                        height="24"></iconify-icon></span>
                             </div>
                             <div class="text">
                                 <h5>Email</h5>
@@ -476,37 +472,37 @@
                                 discuss your ideas and help you turn them into reality</p>
                         </div>
                         <div class="input">
-                            <form class="text-center" id="" method="post" action="{{ route('frontend.contact.store') }}">
+                            <form class="text-center" id="" method="post"
+                                action="{{ route('frontend.contact.store') }}">
                                 @csrf
 
                                 <!-- Name -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Your Name"
-                                        >
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        value="{{ old('name') }}" placeholder="Your Name">
                                     <label for="name">Your Name</label>
 
                                 </div>
 
                                 <!-- Email -->
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" value="{{ old('email') }}" name="email"
-                                        placeholder="Your Email">
+                                    <input type="email" class="form-control" id="email"
+                                        value="{{ old('email') }}" name="email" placeholder="Your Email">
                                     <label for="email">Your Email</label>
 
                                 </div>
 
                                 <!-- Subject -->
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="subject" value="{{ old('subject') }}" name="subject"
-                                        placeholder="Subject">
+                                    <input type="text" class="form-control" id="subject"
+                                        value="{{ old('subject') }}" name="subject" placeholder="Subject">
                                     <label for="subject">Subject</label>
 
                                 </div>
-
+ 
                                 <!-- Message -->
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" id="message" name="message"
-                                        placeholder="Leave a comment here"
+                                    <textarea class="form-control" id="message" name="message" placeholder="Leave a comment here"
                                         style="height: 100px">{{ old('message') }}</textarea>
                                     <label for="message">Message</label>
 
@@ -515,9 +511,9 @@
                                 <!-- Submit Button -->
                                 <button type="submit" id="submitBtn" class="btn btn-primary">Send Message</button>
 
-                              @if(session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+                                @if (session('success'))
+                                    <p style="color: green;">{{ session('success') }}</p>
+                                @endif
 
 
                             </form>
@@ -530,5 +526,4 @@
         <div class="floating-message" id="floatingMsg"></div>
 
     </section>
-
 @endsection
