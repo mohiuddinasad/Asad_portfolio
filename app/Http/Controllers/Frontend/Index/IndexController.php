@@ -62,6 +62,7 @@ class IndexController extends Controller
 
     public function all(Request $request)
     {
+        $user = User::find(2); // Assuming the user with ID 1 is the portfolio owner
         $cv = Setting::get('cv');
         $socialLinks = SocialLink::active()->get();
         $logo = Setting::get('logo');
@@ -81,17 +82,18 @@ class IndexController extends Controller
 
         $projects = $projectsQuery->paginate(12);
 
-        return view('frontends.project', compact('categories', 'projects', 'selectedCategory', 'logo', 'cv', 'socialLinks'));
+        return view('frontends.project', compact('categories', 'projects', 'selectedCategory', 'logo', 'cv', 'socialLinks', 'user'));
     }
 
     public function serviceDetails($slug)
     {
+        $user= User::find(2); // Assuming the user with ID 1 is the portfolio owner
         $cv = Setting::get('cv');
         $socialLinks = SocialLink::active()->get();
         $logo = Setting::get('logo');
         $service = Service::where('slug', $slug)->firstOrFail();
         $services = Service::all(); // Get all services including current one
-        return view('frontends.service_details', compact('service', 'services', 'logo', 'cv', 'socialLinks'));
+        return view('frontends.service_details', compact('service', 'services', 'logo', 'cv', 'socialLinks', 'user'));
     }
 
 }
