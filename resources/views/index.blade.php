@@ -1,0 +1,528 @@
+@extends('frontends.layout')
+@section('frontend_content')
+    <!-- Hero Section -->
+
+    <section id="hero" data-aos="fade-up">
+        <div class="container">
+            <div class="contains">
+                <span>Hello I am</span>
+                @if (Auth::check())
+                    <h4>{{ Auth::user()->name }}</h4>
+                @else
+                    <h4>Mohiuddin Asad</h4>
+                @endif
+                <h1 class="animated_text"></h1>
+                <p class="text">We craft modern, responsive, and user-friendly
+                    websites that <br> help your business
+                    stand out and
+                    grow in the digital world.</p>
+            </div>
+
+            <div class="link">
+                @foreach ($socialLinks as $social)
+                    <a href="{{ $social->url }}" target="_blank"><iconify-icon icon="{{ $social->icon }}" width="27"
+                        height="27"></iconify-icon></a>
+                @endforeach
+            </div>
+
+            <div class="contract">
+                <a class="hire button col-sm-12" href="https://wa.me/{{ $user->phone }}?text=Hello" class="button">Hire
+                    Me</a>
+                <a class="cv col-sm-12" href="{{ asset($cv) }}" Download>Download CV</a>
+            </div>
+        </div>
+    </section>
+    <!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+        <div class="container">
+
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-6" data-aos="zoom-in">
+
+                    <div class="col-lg-5">
+
+                        <img src="{{ $user->user_image ? asset($user->user_image) : asset('backend/assets/images/user/avatar-2.jpg') }}"
+                            class="img-fluid" alt>
+
+
+                    </div>
+                    <div class="row justify-content-between mt-3">
+                        <div class="col-lg-7 about-info p-0">
+
+                            <p><strong>Name: </strong> <span>{{ $user->name }}</span></p>
+
+
+
+                            <p><strong>Profile: </strong> <span>{{ $user->title }}</span></p>
+
+
+
+                            <p><strong>Email: </strong> <span>{{ $user->email }}</span></p>
+
+
+
+                            <p><strong>Phone: </strong> <span>{{ $user->phone }}</span></p>
+
+
+
+                        </div>
+                        <div class="col-lg-5 about-info p-0">
+
+                            <p><strong>Experience: </strong> <span>{{ $user->experience }} years</span></p>
+
+
+                            <p><strong>Age: </strong> <span>{{ $user->age }}</span></p>
+
+
+
+
+
+                            <p><strong>Freelance: </strong> <span>Available</span></p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6" data-aos="zoom-in">
+                    <div class="about-me">
+                        <h4>About me</h4>
+
+                        <p> <span>{{ $user->description }}</span></p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section><!-- /About Section -->
+
+    <!-- ========== Start skills ========== -->
+    <section id="my_skills" data-aos="fade-right">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 coding ">
+                    <h4>Coding skills</h4>
+                    @forelse ($skills as $skill)
+                        <div class="progress_bars">
+                            <div class="percent d-flex justify-content-between">
+                                <p class="m-0">{{ $skill->name }}</p><span>{{ $skill->percentage }}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-percent="{{ $skill->percentage }}" data-color="#0099ff">
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                    @endforelse
+
+                </div>
+                <div class="col-lg-6 coding ">
+                    <h4>Libraries & Frameworks</h4>
+                    @foreach ($frameworkSkills as $frameworkSkill)
+                        <div class="progress_bars">
+                            <div class="percent d-flex justify-content-between">
+                                <p class="m-0">{{ $frameworkSkill->name }}</p>
+                                <span>{{ $frameworkSkill->percentage }}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-percent="{{ $frameworkSkill->percentage }}"
+                                    data-color="#0099ff">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== End skills ========== -->
+
+    <!-- Resume Section -->
+
+    <section id="resume">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="section-title" data-aos="fade-up">
+                <h2>Resume</h2>
+
+            </div><!-- End Section Title -->
+            <div class="row justify-content-between">
+                <div class="col-lg-5 education" data-aos="zoom-in">
+                    <h4>Education</h4>
+                    @foreach ($educations as $education)
+                        <div class="education_item">
+                            <span>{{ $education->duration }}</span>
+                            <h5>{{ $education->title }}</h5>
+                            <p>{{ Str::limit($education->description, 150) }}</p>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-lg-5 education" data-aos="zoom-in">
+                    <h4>Experience</h4>
+                    @foreach ($experiences as $experience)
+                        <div class="education_item">
+                            <span>{{ $experience->duration }}</span>
+                            <h5>{{ $experience->title }}</h5>
+                            <p>{{ Str::limit($experience->description, 150) }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+    </section>
+
+    <!-- /Resume Section -->
+
+    <section id="services" data-aos="fade-right">
+        <div class="container">
+            <div class="contain">
+                <div class="container section-title">
+                    <h2>Services</h2>
+                    <p>I offer a range of services to help you build your online
+                        presence.</p>
+                </div>
+
+            </div>
+            <div class="row justify-content-between boxes">
+                @forelse ($services as $service)
+                    <div class="col-lg-4 servise_box">
+                        <a href="{{ route('frontend.service.details', $service->slug) }}">
+                            <div class="image">
+                                <img class="img-fluid" src="{{ asset($service->image) }}" alt>
+                            </div>
+                            <div class="text d-flex justify-content-center align-items-center">
+                                <h4>{{ Str::limit($service->title, 18) }} </h4>
+                            </div>
+                        </a>
+                    </div>
+                @empty
+                @endforelse
+
+            </div>
+        </div>
+    </section>
+    <!-- /Services Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Projects</h2>
+
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+                <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="filter-active">All</li>
+                    @foreach ($categories as $category)
+                        <li data-filter=".filter-{{ $category->slug }}">{{ $category->name }}</li>
+                    @endforeach
+                </ul><!-- End Portfolio Filters -->
+
+                <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+                    @forelse ($projects as $project)
+                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $project->category->slug }}">
+                            <img src="{{ asset($project->image) }}" class="img-fluid"
+                                alt="{{ $project->title }}">
+                            <div class="portfolio-info">
+                                <h4>{{ $project->title }}</h4>
+                                <p>{{ Str::limit($project->description, 50) }}</p>
+                                <a href="{{ asset($project->image) }}" title="{{ $project->title }}"
+                                    data-gallery="portfolio-gallery-{{ $project->category->slug }}"
+                                    class="glightbox preview-link">
+                                    <i class="bi bi-zoom-in"></i>
+                                </a>
+                                @if ($project->link)
+                                    <a href="{{ $project->link }}" title="More Details" class="details-link"
+                                        target="_blank">
+                                        <i class="bi bi-link-45deg"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div><!-- End Portfolio Item -->
+                    @empty
+                        <div class="col-12 text-center">
+                            <p>No projects available yet.</p>
+                        </div>
+                    @endforelse
+
+
+
+
+
+                </div><!-- End Portfolio Container -->
+                <div class="view_all">
+                    <a href="{{ route('frontend.projects.all') }}">View More</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section><!-- /Portfolio Section -->
+
+   <!-- ========== Start pricing ========== -->
+    <section id="pricing">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-5 contain">
+                    <h4>
+                        Pricing Plans
+                    </h4>
+                    <p>
+                        Stop wasting time and money designing and managing a website
+                        that doesn’t get results. Happiness guaranteed!Stop wasting time
+                        and money designing and managing a website that doesn’t get
+                        results. Happiness guaranteed!
+                    </p>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="row justify-content-between slider">
+                        @foreach ($pricings as $pricing)
+                            <div class="col-lg-6 price_box">
+                                <div class="details">
+                                    <span>{{ $pricing->subtitle }}</span>
+                                    <h4>{{ $pricing->title }}</h4>
+                                    <h5>${{ $pricing->price }}</h5>
+                                    @if ($pricing->features && count($pricing->features) > 0)
+                                        @foreach ($pricing->features as $feature)
+                                            <p>{{ $feature }}</p>
+                                        @endforeach
+                                    @endif
+                                    <a href="{{ route('frontend.contact') }}">Get Started</a>
+                                </div>
+                            </div>
+                        @endforeach
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== End pricing ========== -->
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+
+        <div class="container">
+
+            <div class="row gy-4 align-items-center">
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="content px-xl-5">
+                        <h3><span>Frequently Asked
+                            </span><strong>Questions</strong></h3>
+                        <p>
+                            Here are a few common questions my clients often ask about my
+                            services, workflow, and development process. I hope these
+                            answers will give you a clear idea about how I work.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="faq-container">
+                        @foreach ($faqs as $key => $faq)
+                            <div class="faq-item">
+                                <h3><span class="num">{{ ++$key }}.</span> <span>{{ $faq->question }}</span>
+                                </h3>
+                                <div class="faq-content">
+                                    <p>{{ $faq->answer }}</p>
+                                </div>
+                                <i class="faq-toggle bi bi-chevron-right"></i>
+                            </div><!-- End Faq item-->
+                        @endforeach
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section><!-- /Faq Section -->
+
+     <!-- Testimonials Section -->
+
+
+    {{-- <section id="testimonials" class="testimonials section accent-background">
+        <img src="{{ asset('frontend/assets/img/testimonials-bg.jpg') }}" class="testimonials-bg" alt>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="swiper init-swiper">
+                <script type="application/json" class="swiper-config">
+                            {
+                              "loop": true,
+                              "speed": 600,
+                              "autoplay": {
+                                "delay": 5000
+                              },
+                              "slidesPerView": "auto",
+                              "pagination": {
+                                "el": ".swiper-pagination",
+                                "type": "bullets",
+                                "clickable": true
+                              }
+                            }
+                          </script>
+                <div class="swiper-wrapper">
+
+                    @foreach ($reviews as $review)
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('storage/' . $review->image) }}" class="testimonial-img" alt>
+                                <h3>{{ $review->name }}</h3>
+                                <h4>{{ $review->position }}</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>{{ $review->description }}</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+
+    </section> --}}
+
+    <!-- /Testimonials Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+        <div class="container">
+
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Contact</h2>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100">
+                    <div class="contact_info">
+                        <div class="info_head">
+                            <h3>Contact Info</h3>
+                            <p>Let’s discuss your project.</p>
+                        </div>
+                        <div class="info_item">
+                            <div class="icon">
+                                <span><iconify-icon icon="tdesign:location" width="24"
+                                        height="24"></iconify-icon></span>
+                            </div>
+                            <div class="text">
+                                <h5>Location</h5>
+                                <p>Bahaddarhat, Chittagong, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="info_item">
+                            <div class="icon">
+                                <span><iconify-icon icon="hugeicons:call-02" width="24"
+                                        height="24"></iconify-icon></span>
+                            </div>
+                            <div class="text">
+                                <h5>Phone Number</h5>
+                                <p>{{ $user->phone }}</p>
+                            </div>
+                        </div>
+                        <div class="info_item">
+                            <div class="icon">
+                                <span><iconify-icon icon="tabler:mail" width="24"
+                                        height="24"></iconify-icon></span>
+                            </div>
+                            <div class="text">
+                                <h5>Email</h5>
+                                <p>{{ $user->email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 px-5" data-aos="fade-left" data-aos-delay="200">
+                    <div class="get_in">
+                        <div class="form_head">
+                            <h3>Get In Touch</h3>
+                            <p>If you have a project in mind or need help with building a
+                                website, feel free to reach out. I’m always available to
+                                discuss your ideas and help you turn them into reality</p>
+                        </div>
+                        <div class="input">
+                            <form class="text-center" id="" method="post"
+                                action="{{ route('frontend.contact.store') }}">
+                                @csrf
+
+                                <!-- Name -->
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        value="{{ old('name') }}" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
+
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="email"
+                                        value="{{ old('email') }}" name="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+
+                                </div>
+
+                                <!-- Subject -->
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="subject"
+                                        value="{{ old('subject') }}" name="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+
+                                </div>
+
+                                <!-- Message -->
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Leave a comment here"
+                                        style="height: 100px">{{ old('message') }}</textarea>
+                                    <label for="message">Message</label>
+
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" id="submitBtn" class="btn btn-primary">Send Message</button>
+
+                                @if (session('success'))
+                                    <p style="color: green;">{{ session('success') }}</p>
+                                @endif
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="floating-message" id="floatingMsg"></div>
+
+    </section>
+@endsection
